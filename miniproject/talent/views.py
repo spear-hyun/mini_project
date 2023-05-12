@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render # Create your views here. def index(request): return render(request, "index.html")
 
 # Create your views here.
@@ -10,3 +11,12 @@ def login(request):
 
 def signup(request):
     return render(request, 'signup.html')
+=======
+
+from django.shortcuts import render # Create your views here. def index(request): return render(request, "index.html")
+# Create your views here.
+def index(request):
+    return render(request, 'index.html')
+def login(request):
+    return render(request, 'login.html')
+>>>>>>> happinhwa
