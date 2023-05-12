@@ -16,13 +16,9 @@ Including another URLconf
 """
 '''
 from django.contrib import admin
-<<<<<<< HEAD
-from django.urls import path, inlcude
-=======
 from django.urls import path, include
 from talent import views
 
->>>>>>> happinhwa
 
 urlpatterns = [
     path('admin', admin.site.urls),
