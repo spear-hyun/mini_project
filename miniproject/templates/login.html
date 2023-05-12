@@ -1,4 +1,4 @@
-{% load static %}
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +15,7 @@
     <div id="container">
       <!-- login Box -->
       <div class="login-box">
-        <div id="loginBoxTitle">✨찬웅이네👨🏻✨</div>
+        <div id="loginBoxTitle"><a href = "/talent">✨찬웅이네👨🏻✨</a></div>
         <div class="form-group">
             <label>아이디</label>
             <input type="text" name="uid" id="uid" class="form-control" value="" style="text-transform:uppercase;ime-mode:disabled">
@@ -29,7 +29,9 @@
             
         <div style=""><input type="button" id="btnLogin" value="로그인" class="btn btn-primary"></div>
         </div>
-        <div style=""><input type="button" id="btnJoin" value="회원가입" class="btn btn-secondary"></div>
+        <a href = "/signup">
+        <div style=""><input type="button" id="btnSignup" value="회원가입" class="btn btn-secondary"></div>
+        </a>
 
         
       </div><!-- login Box //-->

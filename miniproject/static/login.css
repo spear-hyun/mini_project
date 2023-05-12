@@ -3,7 +3,6 @@ body {
     background-size: 100%;
     font-size: 0.75rem;
   }
-
   #loginBoxTitle {
     color:#000000;
     font-weight: bold;
@@ -42,7 +41,6 @@ body {
     font-size: 0.75rem;
     margin:5px 0;
   }
-
   #login-btn-box{
     display: flex;
     align-items: center;
