@@ -3,10 +3,6 @@ body {
     background-size: 100%;
     font-size: 0.75rem;
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> happinhwa
   #loginBoxTitle {
     color:#000000;
     font-weight: bold;
@@ -14,17 +10,6 @@ body {
     text-transform: uppercase;
     padding: 5px;
     margin-bottom: 20px;
-<<<<<<< HEAD
-    background: linear-gradient(to right, #270a09, #8ca6ce);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  input[type="button"] {
-    font-size: 0.75rem;
-    padding: 5px 10px;
-  }
-=======
     background: linear-gradient(to right, #dc143c, #87c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -43,40 +28,23 @@ body {
     height: 40px;
 } */
 
->>>>>>> happinhwa
   .login-box {
     margin:150px auto;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
-<<<<<<< HEAD
-    padding:40px 30px;
-    border:5px solid #0e0e0e;width:350px;
-    filter: drop-shadow(0px 0px 10px rgba(0,0,0,.5));
-  }
-  
-=======
     padding:50px 30px;
     border:5px solid #ffffdd;width:350px;
     filter: drop-shadow(0px 0px 10px rgba(255,99,132,0.5));
   }
 
->>>>>>> happinhwa
   .form-group label {
     font-size: 0.75rem;
     margin:5px 0;
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> happinhwa
   #login-btn-box{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top:10px;
-<<<<<<< HEAD
-  }
-=======
     margin-bottom: 10px;
   }
->>>>>>> happinhwa
