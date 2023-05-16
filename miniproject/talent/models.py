@@ -6,8 +6,8 @@ class Category(models.Model):
 class User(models.Model):
     email = models.EmailField(max_length=50, unique=True)
     password = models.CharField(max_length=1000)
-    user_name = models.CharField(max_length=20)
-    birth = models.DateTimeField()
+    user_name = models.CharField(max_length=20, unique=True)
+    birth = models.DateField()
     gender = models.CharField(max_length=15)
     phone_number = models.CharField(max_length=30)
     profile_image = models.ImageField(max_length=100, null=True)
@@ -19,7 +19,7 @@ class Product(models.Model):
     price = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     description = models.CharField(max_length=4000)
-    thumbnail_image = models.CharField(max_length=1000, null=True)
+    thumbnail_image = models.ImageField(upload_to='images/', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Review(models.Model):

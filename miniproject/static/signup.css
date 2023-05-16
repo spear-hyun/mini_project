@@ -13,7 +13,7 @@
    animation-name: headerMove;
    animation-duration: 3s;
    animation-iteration-count: infinite; 
-}
+}                                                                                                         
 /*헤더의 부제목*/
 #header p{
    font-size : 20px;
@@ -22,7 +22,7 @@
    margin-bottom: 2%;
 
 }
-#loginBoxTitle {
+#signupBoxTitle {
     color:#000000;
     font-weight: bold;
     font-size: 1.9rem;
@@ -82,6 +82,7 @@
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
+    width: 200px;
   }
   
   .sign_up:hover {
