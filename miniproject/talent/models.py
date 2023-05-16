@@ -6,8 +6,8 @@ class Category(models.Model):
 class User(models.Model):
     email = models.EmailField(max_length=50, unique=True)
     password = models.CharField(max_length=1000)
-    user_name = models.CharField(max_length=20)
-    birth = models.DateTimeField()
+    user_name = models.CharField(max_length=20, unique=True)
+    birth = models.DateField()
     gender = models.CharField(max_length=15)
     phone_number = models.CharField(max_length=30)
     profile_image = models.ImageField(max_length=100, null=True)
