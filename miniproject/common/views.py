@@ -18,6 +18,7 @@ def mypage(request):
     pass
 
 def signup(request):
+    print(request.POST)
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
