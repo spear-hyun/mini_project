@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'talent',
     'bootstrap4',
-    'common'
+    'common',
+    'django.contrib.humanize'
 
 ]
 
@@ -138,7 +139,10 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+<<<<<<< HEAD:miniproject/miniproject/settings.py
 
+=======
+>>>>>>> 16db27a4e1146d94e4276aa3aef97cd32cd5087c:miniproject /miniproject/settings.py
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
