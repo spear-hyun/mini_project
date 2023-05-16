@@ -14,15 +14,16 @@
   <body class="">
     <div id="container">
       <!-- login Box -->
-      <div class="login-box">
+      <form class="login-box" method="POST" action="{% url 'common:login' %}">
+      {% csrf_token %}
         <div id="loginBoxTitle" style="text-align: center;"><a href = "{% url 'talent:index' %}">✨찬웅이네👨🏻✨</a></div>
         <div class="form-group">
             <label>아이디</label>
-            <input type="text" name="uid" id="uid" class="form-control" value="" style="text-transform:uppercase;ime-mode:disabled; height:3rem;">
+            <input type="text" name="email" id="email" class="form-control" value="" style="text-transform:lowercase;ime-mode:disabled; height:3rem;">
         </div>
         <div class="form-group">
             <label>비밀번호</label>
-            <input type="password" name="upw" id="upw" class="form-control" value="" autocomplete="off" style="height:3rem">
+            <input type="password" name="password" id="password" class="form-control" value="" autocomplete="off" style="height:3rem">
         </div>
         <div style="font-size: 1.5rem;">
           <span> 아이디 저장</span> 
@@ -30,7 +31,7 @@
         </div>
         
         <div id="login-btn-box">
-          <div style="width: 100%"><input type="button" id="btnLogin" value="로그인" class="btn btn-login-color"></div>
+          <div style="width: 100%"><input type="submit" id="btnLogin" value="로그인" class="btn btn-login-color"></div>
         </div>
         
         <a href = "{% url 'common:signup' %}">
@@ -38,7 +39,7 @@
         </a>
 
         
-      </div><!-- login Box //-->
+      </form><!-- login Box //-->
     </div>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

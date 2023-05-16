@@ -1,8 +1,9 @@
 from talent.models import User
 from django.shortcuts import render, redirect
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 import re
+import jwt
 
 def validate_phone_number(phone_number):
     pattern = r"^\d{3}-\d{4}-\d{4}$"
@@ -12,13 +13,32 @@ def index(request):
     return render(request, 'talent/products_list.html')
 
 def login(request):
+    print(request.POST)
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        hashed_password = make_password(password)
+
+        try:
+            print('try문 진입')
+            if User.objects.filter(email=email).exists():
+                user = User.objects.get(email=email)
+                if check_password(password, user.password):
+                    print('이메일 비밀번호 일치@@@@@@@@@@@@@@@@@')
+                    request.session['user']=user.id
+                    token = jwt.encode({'user' : user.id}, SECRET_KEY, algorithm='HS256').decode('UTF-8')
+                    return JsonResponse({"token" : token}, status=200)
+        except:
+            print('에러에러에라ㅓ에러에러에러에러에러')
+
+
+
     return render(request, 'common/login.html')
 
 def mypage(request):
     pass
 
 def signup(request):
-    print(request.POST)
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
