@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'talent',
     'bootstrap4',
-
+    'common'
 
 ]
 

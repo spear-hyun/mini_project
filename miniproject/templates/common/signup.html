@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <!-- Navbar1 -->
+        {% include "navbar1.html" %}
+        <form method="POST" action="{% url 'common:signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                <div class="login-box">
+                    <div id="loginBoxTitle"><a href = "{% url 'talent:index' %}">✨찬웅이네👨🏻✨</a></div>
+                    <hr>
+                        <div class="form-group">
+                            <label>이름</label>
+                            <input class="form-control" type="text" name="user_name" placeholder="이름"value="{{ form.user_name.value|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label>이메일</label>
+                            <input class="form-control" type="email" name="email" placeholder="xxxxx@xxxxxx.xxxxx">
+                            <div style="display: flex; align-items: center;">
+                                <input class="form-check-input" type="checkbox" name="email_agreement" id="email_agreement">
+                                <label class="form-check-label" for="email_agreement" style="margin-top: 10px;">이메일 수신동의</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>비밀번호</label>
+                            <input class="form-control" type="password" name="password" placeholder="Password" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label>비밀번호 확인</label>
+                            <input class="form-control" type="password" name="confirm_password" placeholder="Confirm Password" value="{{ form.confirm_password.value|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">성별</label>
+                            <select class="form-control_select" id="gender" name="gender">
+                                <option value="admin">남자</option>
+                                <option value="seller">여자</option>
+                                <option value="customer">기타</option>
+                            </select>
+                        </div>
+                        <div class="form-group-bir">
+                            <label>생년월일</label>
+                            <input class="form-control" type="date" name="birth" placeholder="YYYY-MM-DD"value="{{ form.birth.value|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label>전화번호</label>
+                            <input class="form-control" type="text" name="phone_number" placeholder="01012345678"value="{{ form.phone_number.value|default_if_none:'' }}">
+                        </div>
+                        <!-- 사용자오류 표시 -->
+                        {% if messages %}
+                            <div class="alert alert-danger my-3" role="alert">
+                                {% for message in messages %}
+                                    <strong>{{ message.tags }}</strong>
+                                    <ul><li>{{ message.message }}</li></ul>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <button type="submit" id="join_button" class="btn btn-primary">회원가입</button>
+                        <div class="form-group">
+                            <a href="{% url 'common:login' %}" style="font-size: 14px; margin-top:10px;">로그인 화면으로 이동하시겠습니까 ? </a>
+                        </div>
+                    </hr>    
+                </div>
+            </div>
+        </form>                                
+    </body>
+</html>

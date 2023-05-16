@@ -1,0 +1,10 @@
+.nav-item .nav-link {
+    font-size: 12px;
+}
+.navbar {
+    background-color: white;
+}
+.navbar-brand {
+    font-weight: bold;
+    font-size: 25px;
+}
