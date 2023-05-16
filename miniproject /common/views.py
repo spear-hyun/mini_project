@@ -28,7 +28,14 @@ def signup(request):
         phone_number = request.POST['phone_number']
         # User 객체를 생성합니다
 
+        try:
+            User.objects.get(user_name=user_name)
+            messages.error(request, '이미 사용 중인 사용자 이름입니다.')
+            return render(request, 'common/signup.html')
+        except User.DoesNotExist:
+            pass
 
+        
         if password != confirm_password:
             # 패스워드와 패스워드 확인이 일치하지 않는 경우에 대한 처리를 수행합니다
             messages.error(request,'패스워드와 패스워드 확인이 일치하지 않습니다.')
@@ -41,7 +48,7 @@ def signup(request):
             print(validate_phone_number(phone_number))
             messages.error(request, "전화번호 형식에 맞지 않습니다.")
             return render(request, 'common/signup.html')
-
+            
         # 비밀번호를 해시하여 저장합니다
         hashed_password = make_password(password)
 

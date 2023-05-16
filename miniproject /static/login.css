@@ -1,46 +1,64 @@
-body {
+/* body {
     background-image: url('./loginbg.png');
     background-size: 100%;
     font-size: 0.75rem;
-  }
+  } */
   #loginBoxTitle {
     color:#000000;
     font-weight: bold;
-    font-size: 1.9rem;
+    font-size: 5rem;
     text-transform: uppercase;
     padding: 5px;
-    margin-bottom: 20px;
+    margin: 0px 0px 10px 0px;
     background: linear-gradient(to right, #dc143c, #87c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   input[type="button"] {
-    font-size: 0.9rem;
+    font-size: 1.7rem;
     /* padding: 10px 120px; */
-    width: 200px;
-    height: 40px;    
+    width: 100%;
+    /* height: 40px;     */
   }
-  /* input[type="button2"] {
-    font-size: 0.9rem;
-    padding: 10px 120px;
-    width: 200px;
-    height: 40px;
-} */
 
   .login-box {
-    margin:150px auto;
+    margin:200px auto;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     padding:50px 30px;
-    border:5px solid #ffffdd;width:350px;
+    border-style: solid;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #87c, #dc143c) 1;
+    width: 800px;
+    height: auto;
     filter: drop-shadow(0px 0px 10px rgba(255,99,132,0.5));
   }
 
+    /* 아이디, 비밀번호 텍스트 크기 지정 */
   .form-group label {
-    font-size: 0.75rem;
+    font-size: 1.7rem;
     margin:5px 0;
   }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  s
   #login-btn-box{
     display: flex;
     align-items: center;
@@ -48,3 +66,43 @@ body {
     margin-top:10px;
     margin-bottom: 10px;
   }
+
+  /* 로그인 버튼 색상 지정 */
+  .btn-login-color{
+    color: #fff;    
+    padding: 8px 16px;
+    font-weight: 600;
+    background: linear-gradient(to right, #dc143c, #87c);
+    border-style: solid;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #dc143c, #87c) 1;
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+  }
+
+  /* 회원가입 버튼 색상 지정 */
+  .btn-signup-color {
+    border: none;
+    background-color: white;
+    /* color: black; */
+    font-weight: 600;
+    padding: 8px 16px;
+    border-style: solid;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #dc143c, #87c) 1;
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+  }
+  /* 버튼 안 글자에 그라데이션 넣기 */
+  .btn-signup-font {
+    background-color: white;
+    padding: 8px 16px;
+    background-image: linear-gradient(to right, #dc143c, #87c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  
+  
