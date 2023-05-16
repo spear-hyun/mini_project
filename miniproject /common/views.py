@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 import re
 
+
 def validate_phone_number(phone_number):
     pattern = r"^\d{3}-\d{4}-\d{4}$"
     return re.match(pattern, phone_number)

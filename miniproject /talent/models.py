@@ -19,7 +19,7 @@ class Product(models.Model):
     price = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     description = models.CharField(max_length=4000)
-    thumbnail_image = models.CharField(max_length=1000, null=True)
+    thumbnail_image = models.ImageField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Review(models.Model):
