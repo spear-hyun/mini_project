@@ -35,17 +35,18 @@ def signup(request):
         except User.DoesNotExist:
             pass
 
-        
+
         if password != confirm_password:
             # 패스워드와 패스워드 확인이 일치하지 않는 경우에 대한 처리를 수행합니다
             messages.error(request,'패스워드와 패스워드 확인이 일치하지 않습니다.')
             return render(request, 'common/signup.html')
-        elif password is None:
+        
+        if password is None:
             # 비밀번호 필드가 없는 경우에 대한 처리를 수행합니다
             error_message = '비밀번호를 입력해주세요.'
             return render(request, 'common/signup.html', {'error_message': error_message})
-        elif not validate_phone_number(phone_number):
-            print(validate_phone_number(phone_number))
+        
+        if not validate_phone_number(phone_number):
             messages.error(request, "전화번호 형식에 맞지 않습니다.")
             return render(request, 'common/signup.html')
             
