@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load humanize %}
+<!-- 상품 이미지가 작으면 뒤에 배경색을 주고 가운데 정렬하게하는 style코드 -->
+<style>
+    .card-img-top {
+      object-fit: contain;
+      object-position: center;
+      background-color: #f5f5f5; /* 배경화면 색상 */
+      height: 220px; /* 이미지 높이를 원하는 크기로 설정 */
+    }
+</style>
 <!-- Section-->
 <section class="py-5">
   <div class="container px-4 px-lg-5 mt-5">

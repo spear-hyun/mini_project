@@ -19,11 +19,7 @@ class Product(models.Model):
     price = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     description = models.CharField(max_length=4000)
-<<<<<<< HEAD:miniproject/talent/models.py
     thumbnail_image = models.ImageField(upload_to='images/', null=True)
-=======
-    thumbnail_image = models.ImageField(null=True)
->>>>>>> 16db27a4e1146d94e4276aa3aef97cd32cd5087c:miniproject /talent/models.py
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Review(models.Model):

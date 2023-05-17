@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load humanize %}
+<style>
+  .card-img-top {
+    object-fit: contain;
+    object-position: center center;
+    background-color: transparent;
+    height: 650px;
+    margin-bottom: 50px;
+    border: 1px solid #f1f1f1; /* 테두리 스타일과 색상 설정 */
+  }
+</style>
+
+<section class="product-detail">
+  <div class="container" style="margin-bottom:50px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 style="text-align: center; margin: 30px 0 70px 0; font-size: 70px; font-family: 'Shinb7';">{{ product.product_name }}</h2>
+      </div>
+      
+      <div class="col-md-12">
+        <div class="row" style="height: 500px;">
+            <div class="col-md-6 text-left" style="margin:auto; ">
+              <img class="card-img-top" src="{{product.thumbnail_image.url}}" alt="..." />
+            </div>
+            <div class="col-md-6 text-left" style="margin-bottom: 50px;">
+              <p class="user-info"><span class="bold-text">Author:</span> {{ seller.user_name }}</p>
+              <p class="user-info"><span class="bold-text">Phone:</span> {{ seller.phone_number }}</p>
+
+              <p class="product-info"><span class="bold-text">Price:</span> {{ product.price|intcomma }}원</p>
+              <!-- <p class="product-info"><span class="bold-text">Category:</span> {{ product.category }}</p> -->
+              <p class="product-info"><span class="bold-text">Description:</span> {{ product.description }}</p>
+              <div class="actions" style="margin-top: 100px;">
+                  <button class="btn-cart">🛒 Add to Cart</button>
+              </div>
+          </div>
+          
+        </div>
+    </div>    
+  </div>
+</section>
+{% endblock %}

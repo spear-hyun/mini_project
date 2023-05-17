@@ -8,5 +8,5 @@ app_name = 'talent'
 urlpatterns = [
     path('', views.index, name='index'), 
     path('productcreate/', views.product_create, name='ProductCreate'),
+    path('<int:product_id>/', views.detail, name='detail')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
