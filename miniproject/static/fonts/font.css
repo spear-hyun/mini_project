@@ -1,0 +1,30 @@
+
+/* 글씨체 추가! */
+@font-face {
+    font-family: 'Shinb7';
+    src: url('/static/fonts/SSShinb7Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa-Bold';
+    src: url('/static/fonts/SpoqaHanSansNeo-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa-Light';
+    src: url('/static/fonts/SpoqaHanSansNeo-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa-Regular';
+    src: url('/static/fonts/SpoqaHanSansNeo-Regular.ttf') format('truetype');}
+
+@font-face {
+    font-family: 'Spoqa-Medium';
+    src: url('/static/fonts/SpoqaHanSansNeo-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa-Thin';
+    src: url('/static/fonts/SpoqaHanSansNeo-Thin.ttf') format('truetype');
+}
