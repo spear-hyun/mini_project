@@ -172,5 +172,3 @@ ACCOUNT_LOGOUT_ON_GET = True
 # Email sending
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-
