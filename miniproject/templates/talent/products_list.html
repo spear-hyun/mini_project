@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 {% load humanize %}
 <!-- Section-->
@@ -17,7 +18,7 @@
                     </div>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">장바구니 추가</a></div>
+                    <div class="text-center"><button id="add_cart" href="{% url 'talent:cart' %}" type="button" class="btn btn-outline-dark mt-auto text-center">장바구니 담기</button></div>
                 </div>
             </div>
         </div>

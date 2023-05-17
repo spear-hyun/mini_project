@@ -7991,7 +7991,7 @@ textarea.form-control-lg {
 }
 
 .text-center {
-  text-align: center !important;
+  text-align: center center !important;
 }
 
 .text-decoration-none {
@@ -10823,4 +10823,8 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+.checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
 }

@@ -13,21 +13,11 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav2">
 			<ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-					<a class="nav-link" href="#">전체</a>
-				</li>
+				{% for category in context %}
 				<li class="nav-item">
-					<a class="nav-link" href="#">스포츠</a>
+					<a class="nav-link" href="#">{{ category.name }}</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">IT</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">예술</a>
-				</li>
-                <li class="nav-item">
-					<a class="nav-link" href="#">일상생활</a>
-				</li>
-			</ul>
+				{% endfor %}
+			</ul>			
 		</div>
 	</nav>
