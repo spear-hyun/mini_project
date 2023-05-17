@@ -4,6 +4,14 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 import re
 import jwt
+from django.http     import HttpResponse, JsonResponse
+from miniproject.settings import SECRET_KEY
+from rest_framework import serializers
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import authenticate, login as d_login, logout as d_logout
 
 def validate_phone_number(phone_number):
     pattern = r"^\d{3}-\d{4}-\d{4}$"
@@ -12,28 +20,35 @@ def validate_phone_number(phone_number):
 def index(request):
     return render(request, 'talent/products_list.html')
 
-def login(request):
-    print(request.POST)
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        hashed_password = make_password(password)
+class login(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
 
         try:
-            print('try문 진입')
-            if User.objects.filter(email=email).exists():
-                user = User.objects.get(email=email)
-                if check_password(password, user.password):
-                    print('이메일 비밀번호 일치@@@@@@@@@@@@@@@@@')
-                    request.session['user']=user.id
-                    token = jwt.encode({'user' : user.id}, SECRET_KEY, algorithm='HS256').decode('UTF-8')
-                    return JsonResponse({"token" : token}, status=200)
-        except:
-            print('에러에러에라ㅓ에러에러에러에러에러')
+            user = User.objects.get(email=email)
+            password_match = check_password(password, user.password)
 
+            if password_match:
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
+                d_login(request, user)
+                refresh = RefreshToken.for_user(user)
+                print(user.user_name)
+                data = { 'name' : user.user_name }
+                token = {
+                    'refresh': str(refresh),
+                    'access': str(refresh.access_token),
+                }
+                return render(request, 'talent/products_list.html', data)
+            
+            else:
+                return Response({'error': '아이디 또는 비밀번호가 일치하지 않습니다'}, status=status.HTTP_401_UNAUTHORIZED)
+            
+        except User.DoesNotExist:
+            return Response({'아이디 또는 비밀번호가 일치하지 않습니다'}, status=status.HTTP_401_UNAUTHORIZED)
 
-
-    return render(request, 'common/login.html')
+    def get(self, request):
+        return render(request, 'common/login.html')
 
 def mypage(request):
     pass
@@ -76,10 +91,27 @@ def signup(request):
 
         user = User.objects.create(email=email, password=hashed_password, user_name=user_name,
                                    birth=birth, gender=gender, phone_number=phone_number,)
+        user2 = user = User.objects.get(email=email)
 
 
         # 사용자를 성공 페이지 또는 다른 원하는 페이지로 리디렉션합니다
+        request.session['user']=user2.user_name
         return redirect('talent:index')
 
     # 요청 메서드가 GET인 경우, 회원가입 양식을 렌더링합니다
     return render(request, 'common/signup.html')
+
+class Userlogout(APIView):
+    def get(self, request):
+        try:
+            d_logout(request)
+            return redirect('/')
+        except Exception as e:
+            print(e)
+
+    def post(self, request):
+        try:
+            d_logout(request)
+            return redirect('/')
+        except Exception as e:
+            print(e)

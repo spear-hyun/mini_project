@@ -11,17 +11,26 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		{% if user.is_authenticated %}
+		<p>{{ name }} 님 환영합니다</p>
+		{% endif %}
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="{% url 'talent:index' %}">Home</a>
 				</li>
+				{% if user.is_authenticated %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'common:logout' %}">로그아웃</a>
+				</li>
+				{% else %}
 				<li class="nav-item">
 					<a class="nav-link" href="{% url 'common:login' %}">로그인</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
 				</li>
+				{% endif %}
 				<!-- 추가적인 네비게이션 메뉴 항목들을 이곳에 추가할 수 있습니다 -->
 			</ul>
 		</div>

@@ -1,9 +1,8 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class Category(models.Model):
-    category = models.CharField(max_length=100)
-
-class User(models.Model):
+class User(AbstractUser):
+    # 추가 필드 및 메서드 정의
     email = models.EmailField(max_length=50, unique=True)
     password = models.CharField(max_length=1000)
     user_name = models.CharField(max_length=20, unique=True)
@@ -12,6 +11,22 @@ class User(models.Model):
     phone_number = models.CharField(max_length=30)
     profile_image = models.ImageField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'talent_user'  # talent_user 테이블과 연결
+
+class Category(models.Model):
+    category = models.CharField(max_length=100)
+
+# class User(models.Model):
+    # email = models.EmailField(max_length=50, unique=True)
+    # password = models.CharField(max_length=1000)
+    # user_name = models.CharField(max_length=20, unique=True)
+    # birth = models.DateField()
+    # gender = models.CharField(max_length=15)
+    # phone_number = models.CharField(max_length=30)
+    # profile_image = models.ImageField(max_length=100, null=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
 
 class Product(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
