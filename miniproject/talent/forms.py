@@ -1,13 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import User
+from .models import User, Product
 
-class CustomUserCreationForm(UserCreationForm) :
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = UserCreationForm.Meta.fields + ('email', 'birth',)
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('user_id', 'product_name', 'category', 'price', 'description','thumbnail_image')
 
-class CustomUserChangeForm(UserChangForm):
-    class Meta :
-        model = User
-        fields = ('email', 'username', 'birth')
+class ProfileImageForm(forms.Form):
+    profile_image = forms.ImageField()

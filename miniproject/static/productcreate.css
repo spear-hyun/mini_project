@@ -1,0 +1,58 @@
+.proc_F {
+    margin: 20px auto;
+    padding: 20px;
+    font-family:'Spoqa-Light';
+    font-size: 25px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #dc143c, #87c) 1;
+    width: 800px;
+}
+
+.proc_F p input[type="file"]{
+    font-size: 18px;  /* 원하는 폰트 크기로 설정 */
+    font-family:'Spoqa-Light';
+    margin-left: 10px;
+}
+
+.proc_F p input[type="text"],
+.proc_F p input[type="number"] {
+    font-size: 18px;  /* 원하는 폰트 크기로 설정 */
+    font-family:'Spoqa-Light';
+    margin-left: 10px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-image: linear-gradient(to right, #dc143c, #87c) 1;
+    /* padding: 5px; */
+    margin-left: 10px;
+}
+.proc_F p select,
+.proc_F p textarea {
+    /* 원하는 스타일을 여기에 추가 */
+    /* 예시: 폰트 크기와 배경색 변경 */
+    font-size: 18px;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-image: linear-gradient(to right, #dc143c, #87c) 1;
+    /* padding: 5px; */
+    margin-left: 10px;
+}
+
+
+.proc_B {
+    background-color: #4CAF50;
+    color: white;
+    font-family:'Spoqa-Light';
+    font-size: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.proc_B:hover {
+    background-color: #45a049;
+}
