@@ -25,8 +25,9 @@
                         <p>{{ product.price| intcomma }} 원</p>
                     </div>
                 </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">장바구니 추가</a></div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                    <div><a href="{% url 'talent:detail' %}" value="{{ product.id }}" class="btn btn-outline-dark mt-auto">상세보기</a></div>
+                    <div><a href="{% url 'talent:cart' %}" class="btn btn-outline-dark mt-auto">장바구니 담기</a></div>
                 </div>
             </div>
         </div>

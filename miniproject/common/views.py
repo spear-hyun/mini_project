@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 import re
+from talent.forms import ProfileImageForm
 
 
 def validate_phone_number(phone_number):
@@ -15,8 +16,26 @@ def index(request):
 def login(request):
     return render(request, 'common/login.html')
 
-def mypage(request):
-    pass
+def mypage(request, user_id):
+    user = User.objects.get(id=user_id)
+    context = {
+        'user' : user
+    }
+    return render(request, 'common/mypage.html', context)
+
+
+def upload_profile_image(request):
+    if request.method == 'POST':
+        form = ProfileImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            request.user.profile_image = form.cleaned_data['profile_image']
+            request.user.save()
+            return redirect('profile')
+    else:
+        form = ProfileImageForm()
+    
+    return render(request, 'mypage.html', {'form': form})
+
 
 def signup(request):
     if request.method == 'POST':
