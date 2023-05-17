@@ -3,15 +3,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 import re
-import jwt
 from django.http     import HttpResponse, JsonResponse
 from miniproject.settings import SECRET_KEY
-from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
-from django.contrib.auth import authenticate, login as d_login, logout as d_logout
+from django.contrib.auth import login as d_login, logout as d_logout
+import common
 
 def validate_phone_number(phone_number):
     pattern = r"^\d{3}-\d{4}-\d{4}$"
@@ -32,13 +30,7 @@ class login(APIView):
             if password_match:
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 d_login(request, user)
-                refresh = RefreshToken.for_user(user)
-                print(user.user_name)
-                data = { 'name' : user.user_name }
-                token = {
-                    'refresh': str(refresh),
-                    'access': str(refresh.access_token),
-                }
+                data = { 'name' : user.username }
                 return render(request, 'talent/products_list.html', data)
             
             else:
@@ -50,22 +42,19 @@ class login(APIView):
     def get(self, request):
         return render(request, 'common/login.html')
 
-def mypage(request):
-    pass
-
 def signup(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
-        user_name = request.POST['user_name']
+        username = request.POST['user_name']
         birth = request.POST['birth']
         gender = request.POST['gender']
         phone_number = request.POST['phone_number']
         # User 객체를 생성합니다
 
         try:
-            User.objects.get(user_name=user_name)
+            User.objects.get(username=username)
             messages.error(request, '이미 사용 중인 사용자 이름입니다.')
             return render(request, 'common/signup.html')
         except User.DoesNotExist:
@@ -89,14 +78,14 @@ def signup(request):
         # 비밀번호를 해시하여 저장합니다
         hashed_password = make_password(password)
 
-        user = User.objects.create(email=email, password=hashed_password, user_name=user_name,
+        User.objects.create(email=email, password=hashed_password, username=username,
                                    birth=birth, gender=gender, phone_number=phone_number,)
-        user2 = user = User.objects.get(email=email)
-
-
-        # 사용자를 성공 페이지 또는 다른 원하는 페이지로 리디렉션합니다
-        request.session['user']=user2.user_name
-        return redirect('talent:index')
+        
+        user = User.objects.get(email=email)
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        d_login(request, user)
+        data = { 'name' : username }
+        return render(request, 'talent/products_list.html', data)
 
     # 요청 메서드가 GET인 경우, 회원가입 양식을 렌더링합니다
     return render(request, 'common/signup.html')
@@ -115,3 +104,6 @@ class Userlogout(APIView):
             return redirect('/')
         except Exception as e:
             print(e)
+
+def mypage(request):
+    pass
