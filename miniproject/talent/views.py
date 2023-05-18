@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect # Create your views here. def index(request): return render(request, "index.html")
+from django.shortcuts import render, redirect
 from .forms import ProductForm
 from .models import Product, Cart, User, Category
 # Create your views here.
@@ -15,14 +15,15 @@ def index(request):
 
 
 def product_create(request):
-    if request.method == 'POST':
+    if request.method == "POST" :
         form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
+        if form.is_valid() :
             form.save()
-            return redirect('talent:index')  # 등록 후 상품 목록 페이지로 이동
-    else:
+            return redirect('talent:index') # 등록 후 상품 목록 페이지로 이동
+
+    else :
         form = ProductForm()
-    return render(request, 'talent/product_create.html', {'form': form})
+    return render(request, 'talent/product_create.html', {'form':form})
 
 def detail(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -68,7 +69,20 @@ def category(request, category_id):
                 'categorys':categorys}
      return render(request, 'talent/products_list.html',context)
 
+        # 장바구니에 있는 상품 목록을 가져옵니다.
+        #cart_items = Cart.objects.filter(user_id=user_id)
+        cart_items = Cart.objects.all()
+        products = []
 
+        for cart_item in cart_items:
+            product = cart_item.product
+            products.append(product)
 
-
-
+        context = {
+            'cart_items' : cart_items,
+            'user_id' : user_id,
+            'products' : products,
+        }
+        return render(request, 'talent/cart.html', context)
+    ##else:
+        return redirect('common:login') # 로그인 페이지로 리다이렉트

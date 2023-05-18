@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import pymysql
-import os
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,14 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'talent',
     'bootstrap4',
-    'common',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'django.contrib.humanize',
 ]
-
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,10 +60,7 @@ ROOT_URLCONF = 'miniproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'), 
-            os.path.join(BASE_DIR, 'templates', 'accounts')
-        ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,7 +85,7 @@ pymysql.version_info=(1, 4, 3, "final", 0)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'talent2',
+        'NAME':'talent',
         'USER':'encore',
         'PASSWORD':'123',
         'HOST':'3.38.166.88',
@@ -121,6 +112,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -133,6 +128,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = "talent"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -143,37 +140,13 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# 장고디비에 이미지 파일올리기~
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 # Auth Settings
 
 AUTH_USER_MODEL = 'talent.User'
-
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of 'allauth'
-    'django.contrib.auth.backends.ModelBackend',
-
-    # 'allauth' specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-
-ACCOUNT_EMAIL_REQUIRED = True
-
-ACCOUNT_SIGNUP_REDIRECT_URL = "/"
-
-LOGIN_REDIRECT_URL = "/"
-
-ACCOUNT_LOGOUT_ON_GET = True
-
-# Email sending
-
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

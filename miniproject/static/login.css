@@ -79,6 +79,7 @@
     background-clip: border-box;
     -webkit-background-clip: border-box;
     -moz-background-clip: border-box;
+    width: 100% !important;
   }
 
   /* 회원가입 버튼 색상 지정 */
@@ -103,6 +104,3 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  
-  
-  
