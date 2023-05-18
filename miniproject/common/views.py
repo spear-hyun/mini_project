@@ -73,10 +73,10 @@ def signup(request):
         # 비밀번호를 해시하여 저장합니다
         hashed_password = make_password(password)
 
-        user = User.objects.create(email=email, password=hashed_password, user_name=user_name,
+        User.objects.create(email=email, password=hashed_password, user_name=user_name,
                                    birth=birth, gender=gender, phone_number=phone_number,)
 
-
+            
         # 사용자를 성공 페이지 또는 다른 원하는 페이지로 리디렉션합니다
         return redirect('talent:index')
 
