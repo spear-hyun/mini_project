@@ -1,0 +1,65 @@
+
+
+.product-info {
+    font-size: 30px;
+    margin: 80px 0 0 0 ;
+    font-family: 'Spoqa-Light';
+    /* 다른 스타일을 적용하고자 하는 경우 추가적인 CSS 스타일을 여기에 작성합니다 */
+}
+.product-info1 {
+    font-size: 60px;
+    margin: 100px 0 80px 0 ;
+    font-family: 'Spoqa-Light';
+    /* 다른 스타일을 적용하고자 하는 경우 추가적인 CSS 스타일을 여기에 작성합니다 */
+}
+.description {
+    font-size: 30px;
+    /* margin: 120px 0 100px 0 ; */
+    font-family: 'Spoqa-Light';
+    /* 다른 스타일을 적용하고자 하는 경우 추가적인 CSS 스타일을 여기에 작성합니다 */
+}
+
+.user-info {
+    font-size: 25px;
+    font-family: 'Spoqa-Light';
+    /* margin-bottom: 30px; */
+    /* 다른 스타일을 적용하고자 하는 경우 추가적인 CSS 스타일을 여기에 작성합니다 */
+}
+.bold-text {
+    font-weight: 900;
+    font-family: 'Spoqa-Bold';
+}
+.bold-text1 {
+    font-weight: 900;
+    font-family: 'Spoqa-Bold';
+    font-size: 60px;
+}
+
+.btn-cart {
+background-color: white;
+font-weight: 600;
+font-size: 25px;
+font-family: 'Shinb7';
+padding: 8px 16px;
+color: #0d6efd; 
+/* border-style: dotted;
+border-radius: 20px;
+border-width: 1px; */
+border-color: transparent;
+/* background-clip: border-box;
+-webkit-background-clip: border-box;
+-moz-background-clip: border-box; */
+}
+
+
+.money {
+    text-align: right;
+    font-family: 'Gothic';
+    font-weight: 550;
+    font-size: 65px;
+  }
+  .money::before {
+    content: "\20a9"; /* 원(₩) 기호 */
+    font-family: 'Spoqa-Bold';
+  }
+  

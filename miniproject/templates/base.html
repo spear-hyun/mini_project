@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<link rel="stylesheet" href="{% static 'productdetail.css' %}">
 </head>
 <body>
 	<!-- Navbar1 -->
@@ -18,18 +19,17 @@
 	<!-- Banner -->
 	<div class="banner">
 		<div class="container">
-			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="1200">
+			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="100%">
 		</div>
 	</div>
 	<!-- Navbar2 -->
   {% include "navbar2.html" %}
   <!-- 메인 리스트 -->
-  {% block content %}
-  {% endblock %}
+	{% block content %}
+	{% endblock %}
   {% block script %}
    {% endblock %}
 	<!-- Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
 	integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ
-
