@@ -10,9 +10,6 @@ def validate_phone_number(phone_number):
     pattern = r"^\d{3}-\d{4}-\d{4}$"
     return re.match(pattern, phone_number)
 
-def index(request):
-    return render(request, 'talent/products_list.html')
-
 def login(request):
     return render(request, 'common/login.html')
 

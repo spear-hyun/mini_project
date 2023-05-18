@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect # Create your views here. def index(request): return render(request, "index.html")
 from .forms import ProductForm
-from .models import Product, Cart
+from .models import Product, Cart, User, Category
 # Create your views here.
 
 def index(request):
     data = Product.objects.all()
-    context = {'data':data}
+    seller_ids = data.values_list('user_id', flat=True)
+    sellers = User.objects.filter(id__in=seller_ids)
+    categorys= Category.objects.all()
+    context = {'data':data,
+               'sellers':sellers,
+               'categorys':categorys}
     return render(request, 'talent/products_list.html',context)
 
 
@@ -22,9 +27,11 @@ def product_create(request):
 def detail(request, product_id):
     product = Product.objects.get(id=product_id)
     seller = product.user_id
+    categorys= Category.objects.all()
     context = {
         'product' : product,
-        'seller' : seller
+        'seller' : seller,
+        'categorys' : categorys
     }
     return render(request, 'talent/products_detail.html', context)
 
@@ -51,6 +58,15 @@ def cart(request):
     ##else:
         return redirect('common:login')  # 로그인 페이지로 리다이렉트
 
+def category(request, category_id):
+     data = Product.objects.filter(category_id=category_id)
+     seller_ids = data.values_list('user_id', flat=True)
+     sellers = User.objects.filter(id__in=seller_ids)
+     categorys= Category.objects.all()
+     context = {'data':data,
+                'sellers':sellers,
+                'categorys':categorys}
+     return render(request, 'talent/products_list.html',context)
 
 
 
