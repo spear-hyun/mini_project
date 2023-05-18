@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load humanize %}
-{% load static %}
 <style>
   .card-img-top {
     object-fit: contain;
@@ -30,18 +29,21 @@
               <p class="user-info"><span class="bold-text">Phone:</span> {{ seller.phone_number }}</p>
 
               <p class="product-info1"><span class="bold-text">Price:</span> <span class="money">{{ product.price|intcomma }}</span></p>
-              <p class="product-info"><span class="bold-text1">강의 설명</span></p>
+              <p class="product-info"><span class="bold-text1">Description</span></p>
               <p class="description"><span class="bold-text">:   </span>{{ product.description }}</p>
               <div class="actions" style="position: relative;">
-                <button class="btn-cart" style="margin-top: 100px;">🛒 Add to Cart</button>
+                <a href="{% url 'talent:add_to_cart' product_id=product.id %}"class="btn-cart" style="margin-top: 100px;">🛒 Add to Cart</a>
               </div>
           </div>
           
         </div>
-    </div>
-        
+    </div>    
   </div>
 </section>
+
+
+
+
 <section class="reviews">
   <div class="row">
   <div class="container">
@@ -51,14 +53,13 @@
       <button class="btn-review" id="open-review-modal">리뷰 작성하기</button>
     </div>
     <br><br>
-    {% for review in data %}
+    {% for review in product.reviews %}
       <div class="review">
-        <p><strong>{{ review.user_id }}</strong></p>
-        <p>{{ review.title }}</p>
+        <p><strong>{{ review.user_name }}</strong></p>
         <p>{{ review.content }}</p>
-        {% if request.user == review.user_id %}
-          <a>Edit</a>
-          <a>Delete</a>
+        {% if request.user == review.user %}
+          <a href="{% url 'edit_review' review.id %}">Edit</a>
+          <a href="{% url 'delete_review' review.id %}">Delete</a>
         {% endif %}
         <hr>
       </div>
@@ -68,17 +69,10 @@
   </div>
 </div>
 <!-- 모달 창 -->
-<div id="review-modal" class="modal">
+<div id="review-modal" class="modal modal-overlay" style="display: none;">
   <div class="modal-content">
-    <button class="close" style="text-align: right";>&times;</button>
-    <h3 style="text-align: center;">리뷰 작성</h3>
-    <form class="review_content" method="post" action="{% url 'talent:ReviewCreate' %}" enctype="multipart/form-data">
-      <input type="hidden" name="product_id" value="{{ product.id }}">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button class="proc_B" type="submit">등록</button>
-    </form>
-  
+    <span class="close">&times;</span>
+    <h2>리뷰 작성</h2>
     <!-- 리뷰 작성 폼 등을 포함한 내용 -->
     <!-- ... -->
   </div>
@@ -88,24 +82,22 @@
   // 모달 창 열기
   var openModalBtn = document.getElementById("open-review-modal");
   var reviewModal = document.getElementById("review-modal");
-
   openModalBtn.addEventListener("click", function() {
     reviewModal.style.display = "block";
   });
-
   // 모달 창 닫기
   var closeModalBtn = document.getElementsByClassName("close")[0];
-
   closeModalBtn.addEventListener("click", function() {
     reviewModal.style.display = "none";
   });
-
   // 모달 창 외부 클릭 시 닫기
-  // window.addEventListener("click", function(event) {
-  //   if (event.target == reviewModal) {
-  //     reviewModal.style.display = "none";
-  //   }
-  // });
+  window.addEventListener("click", function(event) {
+    if (event.target == reviewModal) {
+      reviewModal.style.display = "none";
+    }
+  });
+  
 </script>
 </section>
+
 {% endblock %}

@@ -6,15 +6,20 @@ import re
 from talent.forms import ProfileImageForm
 
 
+
 def validate_phone_number(phone_number):
     pattern = r"^\d{3}-\d{4}-\d{4}$"
     return re.match(pattern, phone_number)
+
+def index(request):
+    return render(request, 'talent/products_list.html')
 
 def login(request):
     return render(request, 'common/login.html')
 
 
-def mypage(request, user_id):
+def mypage(request):
+    user_id=request.user.id
     user = get_object_or_404(User, id=user_id)
 
     if request.method == 'POST':
@@ -72,7 +77,6 @@ def createhistory(request, user_id):
     
 
 def signup(request):
-    print(request.POST)
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -113,11 +117,9 @@ def signup(request):
 
             
         # 사용자를 성공 페이지 또는 다른 원하는 페이지로 리디렉션합니다
-        return render(request, 'common/signup_success.html')
+        return redirect('talent:index')
         
 
     # 요청 메서드가 GET인 경우, 회원가입 양식을 렌더링합니다
     return render(request, 'common/signup.html')
 
-def signup_success(request):
-    return render(request, 'common/signup_success.html')#

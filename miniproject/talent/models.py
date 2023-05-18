@@ -20,7 +20,7 @@ class User(AbstractUser):
     date_joined = None
     
     def __str__(self):
-        return self.username
+        return self.email
     
 class Category(models.Model):
     category = models.CharField(max_length=100)
@@ -41,7 +41,6 @@ class Product(models.Model):
 class Review(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
     content = models.CharField(max_length=1000)
     like_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

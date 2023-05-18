@@ -16,7 +16,7 @@
 			<ul class="navbar-nav ml-auto">
 				{% if user.is_authenticated %}
 					<li class="nav-item">
-						<a class="nav-link1" href="{% url 'common:mypage' user_id=request.user.id %}">{{ user.username }} 님 환영합니다.</a>
+						<a class="nav-link1" href="{% url 'common:mypage' %}">{{ user.username }} 님 환영합니다.</a>
 					</li>	
 					<li>
 						<a class="nav-link1" href="{% url 'account_logout' %}">로그아웃</a>
@@ -29,10 +29,11 @@
 					</li>
 				{% else %}
 				<li class="nav-item">
-					<a class="nav-link1" href="{% url 'account_login' %}">로그인</a>
+					<a class="nav-link1" href="{% url 'common:login' %}">로그인</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link1" href="{% url 'common:signup' %}">회원가입</a>
+				</li>
 				{% endif %}
 				<!-- 추가적인 네비게이션 메뉴 항목들을 이곳에 추가할 수 있습니다 -->
 			</ul>
