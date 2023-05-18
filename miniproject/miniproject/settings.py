@@ -94,7 +94,7 @@ pymysql.version_info=(1, 4, 3, "final", 0)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'talent',
+        'NAME':'talent2',
         'USER':'encore',
         'PASSWORD':'123',
         'HOST':'3.38.166.88',

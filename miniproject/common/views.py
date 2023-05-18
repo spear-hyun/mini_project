@@ -76,8 +76,11 @@ def signup(request):
 
 
         # 사용자를 성공 페이지 또는 다른 원하는 페이지로 리디렉션합니다
-        return redirect('talent:index')
+        return render(request, 'common/signup_success.html')
         
 
     # 요청 메서드가 GET인 경우, 회원가입 양식을 렌더링합니다
     return render(request, 'common/signup.html')
+
+def signup_success(request):
+    return render(request, 'common/signup_success.html')
