@@ -1,0 +1,11 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'productcreate.css'%}">
+    <link rel="stylesheet" href="{% static 'fonts/font.css'%}">
+</head>
+<form class="proc_F" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="proc_B" type="submit">Upload</button>
+</form>

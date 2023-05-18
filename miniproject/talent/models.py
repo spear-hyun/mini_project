@@ -9,7 +9,7 @@ class User(AbstractUser):
     birth = models.DateField()
     gender = models.CharField(max_length=15)
     phone_number = models.CharField(max_length=30)
-    profile_image = models.ImageField(max_length=100, null=True)
+    profile_image = models.ImageField(upload_to='profiles/', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -24,7 +24,7 @@ class Product(models.Model):
     price = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     description = models.CharField(max_length=4000)
-    thumbnail_image = models.CharField(max_length=1000, null=True)
+    thumbnail_image = models.ImageField(upload_to='images/', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Review(models.Model):

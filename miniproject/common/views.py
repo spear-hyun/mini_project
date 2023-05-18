@@ -9,14 +9,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as d_login, logout as d_logout
-import common
+from django.contrib import messages
+from talent.forms import ProfileImageForm
+
 
 def validate_phone_number(phone_number):
     pattern = r"^\d{3}-\d{4}-\d{4}$"
     return re.match(pattern, phone_number)
-
-def index(request):
-    return render(request, 'talent/products_list.html')
 
 class login(APIView):
     def post(self, request):
@@ -30,8 +29,9 @@ class login(APIView):
             if password_match:
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 d_login(request, user)
-                data = { 'name' : user.username }
-                return render(request, 'talent/products_list.html', data)
+                request.session['user_id'] = user.id
+                request.session['user_name'] = user.username
+                return redirect('/')
             
             else:
                 return Response({'error': '아이디 또는 비밀번호가 일치하지 않습니다'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -41,6 +41,26 @@ class login(APIView):
 
     def get(self, request):
         return render(request, 'common/login.html')
+
+def mypage(request, user_id):
+    user = User.objects.get(id=user_id)
+    context = {
+        'user' : user
+    }
+    return render(request, 'common/mypage.html', context)
+
+def upload_profile_image(request):
+    if request.method == 'POST':
+        form = ProfileImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            request.user.profile_image = form.cleaned_data['profile_image']
+            request.user.save()
+            return redirect('profile')
+    else:
+        form = ProfileImageForm()
+    
+    return render(request, 'mypage.html', {'form': form})
+
 
 def signup(request):
     if request.method == 'POST':
