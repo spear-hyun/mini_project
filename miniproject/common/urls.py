@@ -8,8 +8,6 @@ urlpatterns = [
     path('login/', views.login, name = 'login'),
     path('signup/', views.signup, name = 'signup'),
     path('mypage/<int:user_id>/',views.mypage, name='mypage'),
-<<<<<<< HEAD
+    path('orderhistory/<int:user_id>/',views.orderhistory, name='orderhistory'),
+    path('createhistory/<int:user_id>/',views.createhistory, name='createhistory'),
 ]
-=======
-]
->>>>>>> bae6ed45b0d4092bfbec0e25a5ae651f401e0342

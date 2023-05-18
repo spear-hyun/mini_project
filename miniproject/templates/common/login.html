@@ -1,6 +1,34 @@
 {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>찬웅이네 강의사이트</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<link rel="stylesheet" href="{% static 'productdetail.css' %}">
+	<link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+	<!-- Navbar1 -->
+{% include "navbar1.html" %}
+	<!-- Banner -->
+	<div class="banner">
+		<div class="container" style="text-align: center;">
+			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="1200" style="margin: auto;">
+		</div>
+	</div>
+{% include "navbar5.html" %}
+
 {% load i18n %}
 {% load account socialaccount %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +49,8 @@
       <form class = "login" method = "POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         <div class="login-box">
-        <div id="loginBoxTitle" style="text-align: center; font-family: 'Shinb7';"><a href = "{% url 'talent:index' %}">✨찬웅이네👨🏻✨</a></div>
+        <div id="loginBoxTitle" style="text-align: center; font-family: 'Shinb7'; padding:5px"><a href = "{% url 'talent:index' %}">☻ 찬웅이네 ☺︎</a></div>
+        <hr>
         <div class="form-group">
             <label>이메일</label>
             <input type="email" name="login" placeholder = "이메일 주소" class="form-control" value="" required id="email"  style="ime-mode:disabled; height:3rem;">
@@ -36,12 +65,13 @@
         </div>
         <div id="login-btn-box">
           <div style="width: 100%; margin-bottom: 10px;">
-            <button type="submit" id="btnLogin" class="btn btn-login-color">로그인</button>
+            <button type="submit" id="btnLogin" class="btn btn-login-color" style="font-size: 1.5rem;">로그인</button>
           </div>
           
         <a href = "{% url 'common:signup' %}">
-          <div style="width:100%;"><input type="button" id="btnSignup" value="회원가입" class="btn btn-signup-color btn-signup-font"></div>
+          <div style="width:100%;"><input type="button" id="btnSignup" value="회원가입" class="btn btn-signup-color btn-signup-font" style="font-size: 1.5rem;"></div>
           </a>
+        </hr>
       </form>
         </div>
         
@@ -50,7 +80,7 @@
         
       </div><!-- login Box //-->
     </div>
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
+
 </html>
+{% endblock %}
+

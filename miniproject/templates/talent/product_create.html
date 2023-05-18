@@ -1,11 +1,76 @@
 {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>찬웅이네 강의사이트</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<link rel="stylesheet" href="{% static 'productdetail.css' %}">
+	<link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+	{% if error_message %}
+        <script>
+            alert("{{ error_message }}");
+            window.location.href = "{% url 'talent:index' %}";
+        </script>
+    {% endif %}
+	<!-- Navbar1 -->
+  {% include "navbar1.html" %}
+	<!-- Banner -->
+	<div class="banner">
+		<div class="container" style="text-align: center;">
+			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="1200" style="margin: auto;">
+		</div>
+	</div>
+    {% include "navbar4.html" %}
 
+{% block content %}
 <head>
     <link rel="stylesheet" href="{% static 'productcreate.css'%}">
     <link rel="stylesheet" href="{% static 'fonts/font.css'%}">
 </head>
-<form class="proc_F" method="post" enctype="multipart/form-data">
+<!-- <form class="proc_F" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button class="proc_B" type="submit">Upload</button>
+</form> -->
+
+
+<form class="proc_F" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-field">
+        <label for="{{ form.product_name.id_for_label }}">Product Name:</label>
+        {{ form.product_name }}
+    </div>
+    <div class="form-field">
+        <label for="{{ form.price.id_for_label }}">Price:</label>
+        {{ form.price }}
+    </div>
+    <div class="form-field">
+        <label for="{{ form.category.id_for_label }}">Category:</label>
+        {{ form.category }}
+    </div>
+    <div class="form-field">
+        <label for="{{ form.description.id_for_label }}">Description:</label>
+        {{ form.description }}
+    </div>
+    <div class="form-field">
+        <label for="{{ form.thumbnail_image.id_for_label }}">Thumbnail Image:</label>
+        {{ form.thumbnail_image }}
+    </div>
+    <button class="proc_B" type="submit">Upload</button>
 </form>
+{% endblock %}
+  {% block script %}
+   {% endblock %}
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ

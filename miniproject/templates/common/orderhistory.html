@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>찬웅이네 강의사이트</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'productdetail.css' %}">
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+	<!-- Navbar1 -->
+  {% include "navbar1.html" %}
+	<!-- Banner -->
+	<div class="banner">
+		<div class="container" style="text-align: center;">
+			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="1200" style="margin: auto;">
+		</div>
+	</div>
+	<!-- Navbar2 -->
+  {% include "navbar3.html" %}
+  <!-- 메인 리스트 -->
+	{% block content %}
+  {% load humanize %}
+
+  <section class="user-detail">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 style="margin-top: 20px;">{{ user.username }}님의 구매 내역</h2>
+        </div>
+            <div class="col-md-12">
+              <h3 style="margin-top: 20px;">구매한 제품 목록</h3>
+              <ul>
+                {% if orders_ %}
+                {% for product in products %}
+                  <li>
+                    <a href="{% url 'talent:detail' product_id=product.id %}" class="btn">{{ product.product_name }}</a>
+                  </li> 
+                {% endfor %}
+                {% endif %}
+              </ul>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+  {% block script %}
+  {% endblock %}
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ

@@ -13,7 +13,7 @@
 </style>
 
 <section class="product-detail">
-  <div class="container" style="margin-bottom:50px;">
+  <div class="container" style="margin-bottom:200px;">
     <div class="row">
       <div class="col-md-12">
         <h2 style="text-align: center; margin: 30px 0 70px 0; font-size: 70px; font-family: 'Shinb7';">{{ product.product_name }}</h2>
@@ -22,34 +22,82 @@
       <div class="col-md-12">
         <div class="row" style="height: 500px;">
             <div class="col-md-6 text-left" style="margin:auto; ">
-              <img class="card-img-top" src="{{product.thumbnail_image.url}}" alt="..." />
+              <img class="card-img-top" src="{{product.thumbnail_image.url}}" alt="...">
             </div>
             <div class="col-md-6 text-left" style="margin-bottom: 50px;">
-              <p class="user-info"><span class="bold-text">Author:</span> {{ seller.user_name }}</p>
+              <p class="user-info"><span class="bold-text">Author:</span> {{ seller.username }}</p>
               <p class="user-info"><span class="bold-text">Phone:</span> {{ seller.phone_number }}</p>
 
               <p class="product-info1"><span class="bold-text">Price:</span> <span class="money">{{ product.price|intcomma }}</span></p>
-              <!-- <p class="product-info"><span class="bold-text">Category:</span> {{ product.category }}</p> -->
               <p class="product-info"><span class="bold-text1">Description</span></p>
               <p class="description"><span class="bold-text">:   </span>{{ product.description }}</p>
-<<<<<<< HEAD
-              <!-- <div class="actions" style="position: relative;">
-                <button class="btn-cart" style="position: absolute; bottom: 0; left: 0;">🛒 Add to Cart</button>
-              </div> -->
-            
-=======
               <div class="actions" style="position: relative;">
-                <button class="btn-cart" style="position: absolute; bottom: 0; left: 0;">🛒 Add to Cart</button>
+                <a href="{% url 'talent:add_to_cart' product_id=product.id %}"class="btn-cart" style="margin-top: 100px;">🛒 Add to Cart</a>
               </div>
-<!--             
->>>>>>> bae6ed45b0d4092bfbec0e25a5ae651f401e0342
-              <div class="actions" style="margin-top: 100px;">
-                  <button class="btn-cart">🛒 Add to Cart</button>
-              </div> -->
           </div>
           
         </div>
     </div>    
   </div>
 </section>
+
+
+
+
+<section class="reviews">
+  <div class="row">
+  <div class="container">
+    <hr>
+    <h3 style="text-align: center; margin: 30px 0 70px 0; font-size: 70px; font-family: 'Shinb7';">Reviews</h3>
+    <div class="actions" style="width: fit-content; margin-left: 1200px; margin-top: -90px;">
+      <button class="btn-review" id="open-review-modal">리뷰 작성하기</button>
+    </div>
+    <br><br>
+    {% for review in product.reviews %}
+      <div class="review">
+        <p><strong>{{ review.user_name }}</strong></p>
+        <p>{{ review.content }}</p>
+        {% if request.user == review.user %}
+          <a href="{% url 'edit_review' review.id %}">Edit</a>
+          <a href="{% url 'delete_review' review.id %}">Delete</a>
+        {% endif %}
+        <hr>
+      </div>
+    {% empty %}
+      <p style="text-align: center; font-size: 25px;">작성된 리뷰가 없습니다.</p>
+    {% endfor %}
+  </div>
+</div>
+<!-- 모달 창 -->
+<div id="review-modal" class="modal modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>리뷰 작성</h2>
+    <!-- 리뷰 작성 폼 등을 포함한 내용 -->
+    <!-- ... -->
+  </div>
+</div>
+
+<script>
+  // 모달 창 열기
+  var openModalBtn = document.getElementById("open-review-modal");
+  var reviewModal = document.getElementById("review-modal");
+  openModalBtn.addEventListener("click", function() {
+    reviewModal.style.display = "block";
+  });
+  // 모달 창 닫기
+  var closeModalBtn = document.getElementsByClassName("close")[0];
+  closeModalBtn.addEventListener("click", function() {
+    reviewModal.style.display = "none";
+  });
+  // 모달 창 외부 클릭 시 닫기
+  window.addEventListener("click", function(event) {
+    if (event.target == reviewModal) {
+      reviewModal.style.display = "none";
+    }
+  });
+  
+</script>
+</section>
+
 {% endblock %}

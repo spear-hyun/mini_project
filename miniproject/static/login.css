@@ -6,14 +6,14 @@
   #loginBoxTitle {
     color:#000000;
     font-weight: bold;
-    font-size: 5rem;
+    font-size: 3rem;
     text-transform: uppercase;
-    padding: 5px;
     margin: 0px 0px 10px 0px;
     background: linear-gradient(to right, #dc143c, #87c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
 
   input[type="button"] {
     font-size: 1.7rem;
@@ -24,6 +24,7 @@
 
   .login-box {
     margin:200px auto;
+    margin-top: 50px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     padding:50px 30px;

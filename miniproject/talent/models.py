@@ -25,18 +25,9 @@ class User(AbstractUser):
 class Category(models.Model):
     category = models.CharField(max_length=100)
 
-<<<<<<< HEAD
-class User(models.Model):
-    email = models.EmailField(max_length=50, unique=True)
-    password = models.CharField(max_length=1000)
-    user_name = models.CharField(max_length=20, unique=True)
-    birth = models.DateField()
-    gender = models.CharField(max_length=15)
-    phone_number = models.CharField(max_length=30)
-    profile_image = models.ImageField(upload_to='profiles/', null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-=======
->>>>>>> bae6ed45b0d4092bfbec0e25a5ae651f401e0342
+    def __str__(self):
+        return self.category
+
 
 class Product(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -1,5 +1,5 @@
-from talent.models import User
-from django.shortcuts import render, redirect
+from talent.models import User, Ordered, Product
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 import re
@@ -16,26 +16,63 @@ def index(request):
 def login(request):
     return render(request, 'common/login.html')
 
+
 def mypage(request, user_id):
-    user = User.objects.get(id=user_id)
-    context = {
-        'user' : user
-    }
-    return render(request, 'common/mypage.html', context)
+    user = get_object_or_404(User, id=user_id)
 
-
-def upload_profile_image(request):
     if request.method == 'POST':
         form = ProfileImageForm(request.POST, request.FILES)
         if form.is_valid():
-            request.user.profile_image = form.cleaned_data['profile_image']
-            request.user.save()
-            return redirect('profile')
+            user.profile_image = form.cleaned_data['profile_image']
+            user.save()
+            return redirect('common:mypage', user_id=user_id)
     else:
         form = ProfileImageForm()
     
-    return render(request, 'mypage.html', {'form': form})
+    context = {
+        'user': user,
+        'form': form
+    }
+    return render(request, 'common/mypage.html', context)
 
+def orderhistory(request, user_id):
+    # 사용자가 로그인한 경우에만 장바구니를 보여줍니다.
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        # 장바구니에 있는 상품 목록을 가져옵니다.
+        orders_ = Ordered.objects.filter(user_id=user_id)
+        products = []
+        for order_ in orders_:
+            product = order_.product
+            products.append(product)
+        context = {
+            'orders_': orders_,
+            'user_id': user_id,
+            'products': products,
+        }
+        return render(request, 'common/orderhistory.html', context)
+    else:
+        return redirect('common:login')  # 로그인 페이지로 리다이렉트
+
+def createhistory(request, user_id):
+     # 사용자가 로그인한 경우에만 장바구니를 보여줍니다.
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        # 장바구니에 있는 상품 목록을 가져옵니다.
+        creates_ = Product.objects.filter(user_id=user_id)
+        
+        products=[]
+        for create_ in creates_:
+            products.append(create_)
+        context = {
+            'creates_': creates_,
+            'user_id': user_id,
+            'products': products,
+        }
+        return render(request, 'common/createhistory.html', context)
+    else:
+        return redirect('common:login')  # 로그인 페이지로 리다이렉트
+    
 
 def signup(request):
     if request.method == 'POST':
@@ -73,11 +110,7 @@ def signup(request):
         # 비밀번호를 해시하여 저장합니다
         hashed_password = make_password(password)
 
-<<<<<<< HEAD
-        User.objects.create(email=email, password=hashed_password, user_name=user_name,
-=======
         user = User.objects.create(email=email, password=hashed_password, username=username,
->>>>>>> bae6ed45b0d4092bfbec0e25a5ae651f401e0342
                                    birth=birth, gender=gender, phone_number=phone_number,)
 
             
