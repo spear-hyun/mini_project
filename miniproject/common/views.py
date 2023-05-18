@@ -39,14 +39,14 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
-        user_name = request.POST['user_name']
+        username = request.POST['username']
         birth = request.POST['birth']
         gender = request.POST['gender']
         phone_number = request.POST['phone_number']
         # User 객체를 생성합니다
 
         try:
-            User.objects.get(user_name=user_name)
+            User.objects.get(username=username)
             messages.error(request, '이미 사용 중인 사용자 이름입니다.')
             return render(request, 'common/signup.html')
         except User.DoesNotExist:
@@ -70,12 +70,13 @@ def signup(request):
         # 비밀번호를 해시하여 저장합니다
         hashed_password = make_password(password)
 
-        user = User.objects.create(email=email, password=hashed_password, user_name=user_name,
+        user = User.objects.create(email=email, password=hashed_password, username=username,
                                    birth=birth, gender=gender, phone_number=phone_number,)
 
 
         # 사용자를 성공 페이지 또는 다른 원하는 페이지로 리디렉션합니다
         return redirect('talent:index')
+        
 
     # 요청 메서드가 GET인 경우, 회원가입 양식을 렌더링합니다
     return render(request, 'common/signup.html')

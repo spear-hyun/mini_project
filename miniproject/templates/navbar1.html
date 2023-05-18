@@ -17,6 +17,14 @@
 				<li class="nav-item">
 					<a class="nav-link1" href="{% url 'talent:index' %}">Home</a>
 				</li>
+				{% if user.is_authenticated %}
+					<li>
+						<p>{{ user.username }}</p>
+					</li>
+					<li>
+						<a class="nav-link" href="{% url 'account_logout' %}">로그아웃</a>
+					</li>
+				{% else %}
 				<li class="nav-item">
 					<a class="nav-link1" href="{% url 'common:login' %}">로그인</a>
 				</li>
@@ -29,6 +37,7 @@
 				<li class="nav-item">
 					<a class="nav-link1" href="{% url 'talent:cart' %}">장바구니</a>
 				</li>
+				{% endif %}
 				<!-- 추가적인 네비게이션 메뉴 항목들을 이곳에 추가할 수 있습니다 -->
 			</ul>
 		</div>

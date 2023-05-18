@@ -20,8 +20,8 @@
       <!-- login Box -->
       <form class = "login" method = "POST" action="{% url 'account_login' %}">
         {% csrf_token %}
-        <div class="login-box">
-        <div id="loginBoxTitle" style="text-align: center; font-family: 'Shinb7';"><a href = "{% url 'talent:index' %}">✨찬웅이네👨🏻✨</a></div>
+	<div class="login-box">
+            <div id="loginBoxTitle" style="text-align: center; font-family: 'Shinb7';"><a href = "{% url 'talent:index' %}">☻ 찬웅이네 ☺︎</a></div>
         <div class="form-group">
             <label>이메일</label>
             <input type="email" name="login" placeholder = "이메일 주소" class="form-control" value="" required id="email"  style="ime-mode:disabled; height:3rem;">
@@ -35,15 +35,14 @@
           <input type="checkbox" id="workSite" name="worksite" style="margin: 0px 0px 0px 10px; -webkit-transform: scale(2);">
         </div>
         <div id="login-btn-box">
-          <div style="width: 100%; margin-bottom: 10px;">
+          <div style="width: 100%; margin-bottom: 10px">
             <button type="submit" id="btnLogin" class="btn btn-login-color">로그인</button>
           </div>
-          
         <a href = "{% url 'common:signup' %}">
           <div style="width:100%;"><input type="button" id="btnSignup" value="회원가입" class="btn btn-signup-color btn-signup-font"></div>
           </a>
       </form>
-        </div>
+    </div>
         
         
 
