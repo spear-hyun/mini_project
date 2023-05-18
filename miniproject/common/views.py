@@ -83,4 +83,4 @@ def signup(request):
     return render(request, 'common/signup.html')
 
 def signup_success(request):
-    return render(request, 'common/signup_success.html')
+    return render(request, 'common/signup_success.html')#
