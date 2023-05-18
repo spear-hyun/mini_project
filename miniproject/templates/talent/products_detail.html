@@ -25,7 +25,7 @@
               <img class="card-img-top" src="{{product.thumbnail_image.url}}" alt="..." />
             </div>
             <div class="col-md-6 text-left" style="margin-bottom: 50px;">
-              <p class="user-info"><span class="bold-text">Author:</span> {{ seller.user_name }}</p>
+              <p class="user-info"><span class="bold-text">Author:</span> {{ seller.username }}</p>
               <p class="user-info"><span class="bold-text">Phone:</span> {{ seller.phone_number }}</p>
 
               <p class="product-info1"><span class="bold-text">Price:</span> <span class="money">{{ product.price|intcomma }}</span></p>
@@ -33,7 +33,7 @@
               <p class="product-info"><span class="bold-text1">Description</span></p>
               <p class="description"><span class="bold-text">:   </span>{{ product.description }}</p>
               <div class="actions" style="position: relative;">
-                <button class="btn-cart" style="position: absolute; bottom: 0; left: 0;">🛒 Add to Cart</button>
+                <button class="btn-cart" style="margin-top: 100px;">🛒 Add to Cart</button>
               </div>
 <!--             
               <div class="actions" style="margin-top: 100px;">

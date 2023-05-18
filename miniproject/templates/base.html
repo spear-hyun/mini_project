@@ -14,6 +14,12 @@
 	<link rel="stylesheet" href="{% static 'productdetail.css' %}">
 </head>
 <body>
+	{% if error_message %}
+        <script>
+            alert("{{ error_message }}");
+            window.location.href = "{% url 'talent:index' %}";
+        </script>
+    {% endif %}
 	<!-- Navbar1 -->
   {% include "navbar1.html" %}
 	<!-- Banner -->
