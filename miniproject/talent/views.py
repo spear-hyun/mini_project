@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render # Create your views here. def index(request): return render(request, "index.html")
-
-# Create your views here.
-
-def index(request):
-    return render(request, 'talent/products_list.html')
-=======
 from django.shortcuts import render, redirect
 from .forms import ProductForm
 from .models import Product, Cart, User, Category
@@ -110,4 +102,3 @@ def add_to_cart(request, product_id):
 
 
 
->>>>>>> 4c64a3d516289f48143383d745fbf98d6d352726
