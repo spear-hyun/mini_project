@@ -4,7 +4,8 @@ from .models import User, Product, Review
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('user_id', 'product_name', 'category', 'price', 'description','thumbnail_image')
+        exclude = ['user_id']
+
 
 class ReviewForm(forms.ModelForm):
     class Meta:

@@ -14,7 +14,7 @@
 </style>
 
 <section class="product-detail">
-  <div class="container" style="margin-bottom:50px;">
+  <div class="container" style="margin-bottom:200px;">
     <div class="row">
       <div class="col-md-12">
         <h2 style="text-align: center; margin: 30px 0 70px 0; font-size: 70px; font-family: 'Shinb7';">{{ product.product_name }}</h2>
@@ -23,23 +23,18 @@
       <div class="col-md-12">
         <div class="row" style="height: 500px;">
             <div class="col-md-6 text-left" style="margin:auto; ">
-              <img class="card-img-top" src="{{product.thumbnail_image.url}}" alt="..." />
+              <img class="card-img-top" src="{{product.thumbnail_image.url}}" alt="...">
             </div>
             <div class="col-md-6 text-left" style="margin-bottom: 50px;">
-              <p class="user-info"><span class="bold-text">작성자:</span> {{ seller.user_name }}</p>
+              <p class="user-info"><span class="bold-text">작성자:</span> {{ seller.username }}</p>
               <p class="user-info"><span class="bold-text">Phone:</span> {{ seller.phone_number }}</p>
 
               <p class="product-info1"><span class="bold-text">Price:</span> <span class="money">{{ product.price|intcomma }}</span></p>
-              <!-- <p class="product-info"><span class="bold-text">Category:</span> {{ product.category }}</p> -->
               <p class="product-info"><span class="bold-text1">강의 설명</span></p>
               <p class="description"><span class="bold-text">:   </span>{{ product.description }}</p>
               <div class="actions" style="position: relative;">
-                <button class="btn-cart" style="position: absolute; bottom: 0; left: 0;">🛒 Add to Cart</button>
+                <a href="{% url 'talent:add_to_cart' product_id=product.id %}"class="btn-cart" style="margin-top: 100px;">🛒 Add to Cart</a>
               </div>
-<!--             
-              <div class="actions" style="margin-top: 100px;">
-                  <button class="btn-cart">🛒 Add to Cart</button>
-              </div> -->
           </div>
           
         </div>
@@ -47,7 +42,6 @@
         
   </div>
 </section>
-<br><br><br><br><br><br>
 <section class="reviews">
   <div class="row">
   <div class="container">

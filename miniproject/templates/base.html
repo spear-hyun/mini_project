@@ -12,14 +12,21 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="{% static 'styles.css' %}">
 	<link rel="stylesheet" href="{% static 'productdetail.css' %}">
+	<link rel="stylesheet" href="{% static 'nav.css' %}">
 </head>
 <body>
+	{% if error_message %}
+        <script>
+            alert("{{ error_message }}");
+            window.location.href = "{% url 'talent:index' %}";
+        </script>
+    {% endif %}
 	<!-- Navbar1 -->
   {% include "navbar1.html" %}
 	<!-- Banner -->
 	<div class="banner">
-		<div class="container">
-			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="100%">
+		<div class="container" style="text-align: center;">
+			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="1200" style="margin: auto;">
 		</div>
 	</div>
 	<!-- Navbar2 -->
@@ -32,4 +39,4 @@
 	<!-- Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-	integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ
+	integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ"></script>

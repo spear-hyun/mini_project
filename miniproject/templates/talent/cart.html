@@ -1,10 +1,43 @@
 {% load static %}
 {% load humanize %}
 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>찬웅이네 강의사이트</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<link rel="stylesheet" href="{% static 'productdetail.css' %}">
+	<link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+	{% if error_message %}
+        <script>
+            alert("{{ error_message }}");
+            window.location.href = "{% url 'talent:index' %}";
+        </script>
+    {% endif %}
+	<!-- Navbar1 -->
+  {% include "navbar1.html" %}
+	<!-- Banner -->
+	<div class="banner">
+		<div class="container" style="text-align: center;">
+			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="1200" style="margin: auto;">
+		</div>
+	</div>
+{% include "navbar3.html" %}
+
+{% block content %}
 <!doctype html>
 <html lang="ko">
 <head>
-    <!-- Required meta tags -->
+    <!-- 필수 메타 태그 -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -14,24 +47,27 @@
     <title>장바구니</title>
 </head>
 <body>
+    {% if error_message %}
+        <script>
+            alert("{{ error_message }}");
+            window.location.href = "{% url 'talent:cart' %}";
+        </script>
+    {% endif %}
     <div class="container my-3">
         <table class="table">
             <thead>
                 <tr class="text-center thead-dark">
-                    <th style="width:10%; font-size: 30px; ">체크박스</th>
                     <th style="width:10%; font-size: 30px;">번호</th>
                     <th style="width:30%; font-size: 30px;">상품이미지</th>
                     <th style="width:30%; font-size: 30px;">상품명</th>
                     <th style="width:20%; font-size: 30px;">상품가격</th>
+                    <th style="width:10%; font-size: 30px;">삭제</th>
                 </tr>
             </thead>
             <tbody>
             {% if cart_items %}
             {% for product in products %}
             <tr class="text-center">
-                <td class="checkbox">
-                    <input type="checkbox" name="product_checkbox" value="{{ product.id }}">
-                </td>
                 <td>
                     <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
                     <h4>{{ forloop.counter }}</h4>
@@ -45,6 +81,12 @@
                 <td class="text-center">
                     <h4>{{ product.price|intcomma }}</h4>
                 </td>
+                <td class="text-center">
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div><a href="{% url 'talent:delete' product_id=product.id %}" " class="btn btn-outline-dark mt-auto">삭제</a></div>
+                        <div><a href="{% url 'talent:payment' product_id=product.id %}" class="btn btn-outline-dark mt-auto">구매</a></div>
+                    </div>
+                </td>
             </tr>
             {% endfor %}
             {% else %}
@@ -57,3 +99,4 @@
     </div>
 </body>
 </html>
+{% endblock %}
