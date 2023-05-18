@@ -20,7 +20,7 @@ class User(AbstractUser):
     date_joined = None
     
     def __str__(self):
-        return self.email
+        return self.username
     
 class Category(models.Model):
     category = models.CharField(max_length=100)

@@ -8,7 +8,7 @@
 	</head>	
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg">
-		<a class="navbar-brand" style="font-family: 'Shinb7'; font-weight: 900;" >찬 웅 이 네   ◡̈   강 의 사 이 트</a>
+		<a class="navbar-brand" style="font-family: 'Shinb7'; font-weight: 900;" href="{% url 'talent:index' %}" >찬 웅 이 네   ◡̈   강 의 사 이 트</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -19,10 +19,16 @@
 				</li>
 				{% if user.is_authenticated %}
 					<li>
-						<p>{{ user.username }}</p>
+						<a>{{ user_name }}</a>
 					</li>
 					<li>
 						<a class="nav-link" href="{% url 'account_logout' %}">로그아웃</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link1" href="{% url 'talent:ProductCreate' %}">상품 등록</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link1" href="{% url 'talent:cart' %}">장바구니</a>
 					</li>
 				{% else %}
 				<li class="nav-item">
@@ -30,13 +36,7 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link1" href="{% url 'common:signup' %}">회원가입</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link1" href="{% url 'talent:ProductCreate' %}">상품 등록</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link1" href="{% url 'talent:cart' %}">장바구니</a>
-				</li>
+				</li>		
 				{% endif %}
 				<!-- 추가적인 네비게이션 메뉴 항목들을 이곳에 추가할 수 있습니다 -->
 			</ul>
