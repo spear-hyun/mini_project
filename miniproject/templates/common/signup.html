@@ -1,5 +1,30 @@
 {% load static %}
-
+<!DOCTYPE html>
+<html>
+<head>
+	<title>찬웅이네 강의사이트</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<link rel="stylesheet" href="{% static 'productdetail.css' %}">
+	<link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+	<!-- Navbar1 -->
+{% include "navbar1.html" %}
+	<!-- Banner -->
+	<div class="banner">
+		<div class="container" style="text-align: center;">
+			<img src="/static/배너이미지.jpeg" alt="배너 이미지" width="1200" style="margin: auto;">
+		</div>
+	</div>
+{% include "navbar6.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,7 +46,8 @@
         <div class="container">
                 <form class="signup-box" method="POST" action="{% url 'common:signup' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div id="signupBoxTitle" style="font-family: 'Shinb7';"><a href = "{% url 'talent:index' %}">☻ 찬웅이네 ☺︎</a></div>
+                    <div id="signupBoxTitle" style="text-align: center; font-family: 'Shinb7';"><a href = "{% url 'talent:index' %}">☻ 찬웅이네 ☺︎</a></div>
+                    <div></div>
                     <hr>
                         <!-- 사용자오류 표시 -->
                         {% if messages %}
@@ -68,7 +94,7 @@
                         </div>   
 
                         <div class="button-group" >
-                            <div><input type="submit" id="btnsignup" value="회원가입" class="btn btn-signup-color btn-signup-font" style="width: 100%;"></div>
+                            <div><input type="submit" id="btnsignup" value="회원가입" class="btn btn-signup-color btn-signup-font" style="width: 100%; font-size: 1.5rem;"></div>
                         </div>
                         <div class="form-group" style="text-align: right; margin-top: 10px;">
                             <a href="{% url 'common:login' %}" style="font-size: 1.5rem;">로그인 화면으로 이동하시겠습니까 ? </a>
@@ -78,3 +104,10 @@
             </div>                      
     </body>
 </html>
+{% endblock %}
+{% block script %}
+{% endblock %}
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ

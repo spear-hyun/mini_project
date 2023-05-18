@@ -17,20 +17,20 @@
         {% for product in data %}
         <div class="col mb-5">
             <div class="card h-100">
-                <img class="card-img-top" src="{{ product.thumbnail_image.url }}"alt="..." />
+                <img class="card-img-top" src="{{ product.thumbnail_image.url }}"alt="...">
                 <div class="card-body p-4">
                     <div class="text-center">
                         <h5 class="fw-bolder" >{{ product.product_name }}</h5>
                         {% for seller in sellers %}
                             {% if seller == product.user_id %}
-                                <a class="fw-bolder">{{ seller.user_name }}</a>
+                                <a class="fw-bolder">{{ seller.username }}</a>
                             {% endif %}
                         {% endfor %}                       
                         <p>{{ product.price| intcomma }} 원</p>
                     </div>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
-                    <div><a href="{% url 'talent:detail' product_id=product.id %}" " class="btn btn-outline-dark mt-auto">상세보기</a></div>
+                    <div><a href="{% url 'talent:detail' product_id=product.id %}" class="btn btn-outline-dark mt-auto">상세보기</a></div>
                     <div><a href="{% url 'talent:add_to_cart' product_id=product.id %}" class="btn btn-outline-dark mt-auto">장바구니 담기</a></div>
                 </div>
             </div>

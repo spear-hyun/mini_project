@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import ProductForm
 from .models import Product, Cart, User, Category, Ordered
 
+from .forms import ProductForm, ReviewForm
+from .models import Product, Cart, User, Category, Review, Ordered
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -10,7 +13,6 @@ def index(request):
     sellers = User.objects.filter(id__in=seller_ids)
     categorys= Category.objects.all()
     user_name = request.user.username
-
     context = {'data':data,
                'sellers':sellers,
                'categorys':categorys,
@@ -18,6 +20,7 @@ def index(request):
     return render(request, 'talent/products_list.html',context)
 
 
+@login_required
 def product_create(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
@@ -27,18 +30,24 @@ def product_create(request):
             product.save()
             return redirect('talent:index')# 등록 후 상품 목록 페이지로 이동
 
-    else :
+    else:
         form = ProductForm()
-    return render(request, 'talent/product_create.html', {'form':form})
+    return render(request, 'talent/product_create.html', {'form': form})
+
+
 
 def detail(request, product_id):
+    data = Review.objects.filter(product_id=product_id)
     product = Product.objects.get(id=product_id)
     seller = product.user_id
     categorys= Category.objects.all()
+    form = ReviewForm()
     context = {
         'product' : product,
         'seller' : seller,
-        'categorys' : categorys
+        'categorys' : categorys,
+        'form' : form,
+        'data' : data,
     }
     return render(request, 'talent/products_detail.html', context)
 
@@ -78,8 +87,6 @@ def category(request, category_id):
      return render(request, 'talent/products_list.html',context)
 
 
-
-
 def add_to_cart(request, product_id):
     # 로그인한 사용자인지 확인
     if request.user.is_authenticated:
@@ -104,6 +111,23 @@ def add_to_cart(request, product_id):
          # 로그인되지 않은 경우 로그인 페이지로 이동하거나 원하는 경로로 설정하세요.
         return redirect('account:login')
 
+def review_create(request):
+    id = request.POST.get('product_id')
+    if request.method == "POST" :
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user_id = request.user
+            review.product_id = id
+            review.save()
+            url = f'/product/{id}/'
+            return redirect(url) # 등록 후 상품 상세 페이지로 이동
+
+    else :
+        pass
+
+def show_review(request, context):
+    pass
 
 
 def payment(request, product_id):
@@ -152,6 +176,3 @@ def delete(request,product_id):
         'error_message':error_message,
     }
     return render(request, 'talent/cart.html', context)
-
-    
-        

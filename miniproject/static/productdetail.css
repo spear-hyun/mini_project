@@ -61,5 +61,34 @@ border-color: transparent;
   .money::before {
     content: "\20a9"; /* 원(₩) 기호 */
     font-family: 'Spoqa-Bold';
+}
+  
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(0%, 0%);
+    width: 400px; /* 모달 창의 너비를 적절히 조정해주세요 */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.modal-content {
+    max-width: 600px;
+    width: 100%;
+    height: 400px; /* 원하는 세로 길이로 변경하세요 */
+    transform: translate(100%, 50%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
   }
   
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}

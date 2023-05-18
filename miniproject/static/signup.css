@@ -22,17 +22,7 @@
    margin-bottom: 2%;
 
 }
-#signupBoxTitle {
-    color:#000000;
-    font-weight: bold;
-    font-size: 1.9rem;
-    text-transform: uppercase;
-    padding: 5px;
-    margin-bottom: 20px;
-    background: linear-gradient(to right, #dc143c, #87c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+
 
   
   h1 {
@@ -144,11 +134,11 @@
     background-size: 100%;
     font-size: 0.75rem;
   }
-  
+   
   #signupBoxTitle {
     color:#000000;
     font-weight: bold;
-    font-size: 5rem;
+    font-size: 3rem;
     text-transform: uppercase;
     margin: 0px 0px 10px 0px;
     text-align: center;
@@ -163,16 +153,11 @@
     margin-top: 10px;
   }
 
-  /* input[type="button2"] {
-    font-size: 0.9rem;
-    padding: 10px 120px;
-    width: 200px;
-    height: 40px;
-} */
 
   /* 전체 회원가입 틀 관한 크기 */
   .signup-box {
     margin:200px auto;
+    margin-top: 50px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     padding:50px 30px;

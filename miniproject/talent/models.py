@@ -41,6 +41,7 @@ class Product(models.Model):
 class Review(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
     content = models.CharField(max_length=1000)
     like_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
