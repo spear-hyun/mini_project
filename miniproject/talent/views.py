@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import ProductForm
-from .models import Product, Cart, User, Category, Ordered
+from .forms import ProductForm, ReviewForm
+from .models import Product, Cart, User, Category, Ordered, Review
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  
 
@@ -38,14 +38,19 @@ def product_create(request):
 
 
 
+
 def detail(request, product_id):
+    data = Review.objects.filter(product_id=product_id)
     product = Product.objects.get(id=product_id)
     seller = product.user_id
     categorys= Category.objects.all()
+    form = ReviewForm()
     context = {
         'product' : product,
         'seller' : seller,
-        'categorys' : categorys
+        'categorys' : categorys,
+        'form' : form,
+        'data' : data,
     }
     return render(request, 'talent/products_detail.html', context)
 
@@ -158,6 +163,7 @@ def delete(request,product_id):
     return render(request, 'talent/cart.html', context)
 
     
+<<<<<<< HEAD
 def delete_all(request):
     cart_items = Cart.objects.filter(user_id=request.user)
 
@@ -183,3 +189,23 @@ def payment_all(request):
     }
     return render(request, 'talent/cart.html', context)
         
+=======
+
+def review_create(request):
+    id = request.POST.get('product_id')
+    if request.method == "POST" :
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user_id = request.user
+            review.product_id = id
+            review.save()
+            url = f'/product/{id}/'
+            return redirect(url) # 등록 후 상품 상세 페이지로 이동
+
+    else :
+        pass
+
+def show_review(request, context):
+    pass
+>>>>>>> 155b7187b1e442b1d3f13fba2c568a8011e6526a

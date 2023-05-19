@@ -10,5 +10,5 @@ urlpatterns = [
     path('mypage/',views.mypage, name='mypage'),
     path('orderhistory/<int:user_id>/',views.orderhistory, name='orderhistory'),
     path('createhistory/<int:user_id>/',views.createhistory, name='createhistory'),
-
+    path('signup/success', views.signup_success, name='signup_success'),
 ]
