@@ -58,26 +58,34 @@
       <button class="btn btn-outline-dark mt-auto" id="open-review-modal">리뷰 작성하기</button>
     </div>
     <br><br>
-    {% for review in data %}
-  <div class="container">
+  <div class="container" style="margin-bottom: 100px;">
     <div class="row">
-      {% for index in "01" %}
+      {% for review in data %}
       <div class="col-md-6">
-        <p><strong>{{ review.user_id }}</strong></p>
-        <p>{{ review.title }}</p>
-        <p>{{ review.content }}</p>
+        <p><strong style="font-size: 30px;">{{ review.title }}</strong></p>
+        <p style="font-size: 20px;">{{ review.content }}</p>
+        <p>작성자: {{ review.user_id.username }}</p>
+        <p>{{ review.created_at }}</p>
         {% if request.user == review.user_id %}
-          <a>Edit</a>
-          <a>Delete</a>
+        <div class="border-top-0 bg-transparent pt-0 justify-content-between" style="text-align: right;">
+          <div style="display: inline-block; margin-right: 10px">
+            <a href="#" class="btn btn-outline-dark mt-auto">Edit</a>
+          </div>
+          <div style="display: inline-block; margin-right: 50px">
+            <a href="#" class="btn btn-outline-dark mt-auto">Delete</a>
+          </div>
+        </div>
+        
+        
+      
         {% endif %}
         <hr>
       </div>
+      {% empty %}
+      <p style="text-align: center; font-size: 25px; margin-bottom: 100px;">작성된 리뷰가 없습니다.</p>
       {% endfor %}
     </div>
   </div>
-    {% empty %}
-      <p style="text-align: center; font-size: 25px; margin-bottom: 100px;">작성된 리뷰가 없습니다.</p>
-    {% endfor %}
   </div>
 </div>
 <!-- 모달 창 -->

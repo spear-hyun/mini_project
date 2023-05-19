@@ -40,7 +40,7 @@ def product_create(request):
 
 
 def detail(request, product_id):
-    data = Review.objects.filter(product_id=product_id)
+    data = Review.objects.filter(product_id=product_id).order_by('-created_at')
     product = Product.objects.get(id=product_id)
     seller = product.user_id
     categorys= Category.objects.all()
