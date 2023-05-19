@@ -163,7 +163,6 @@ def delete(request,product_id):
     return render(request, 'talent/cart.html', context)
 
     
-<<<<<<< HEAD
 def delete_all(request):
     cart_items = Cart.objects.filter(user_id=request.user)
 
@@ -189,7 +188,6 @@ def payment_all(request):
     }
     return render(request, 'talent/cart.html', context)
         
-=======
 
 def review_create(request):
     id = request.POST.get('product_id')
@@ -205,7 +203,3 @@ def review_create(request):
 
     else :
         pass
-
-def show_review(request, context):
-    pass
->>>>>>> 155b7187b1e442b1d3f13fba2c568a8011e6526a
