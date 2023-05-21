@@ -26,13 +26,12 @@
               <img class="card-img-top" src="{{product.thumbnail_image.url}}" alt="...">
             </div>
             <div class="col-md-6 text-left" style="margin-bottom: 50px;">
-              <p class="user-info"><span class="bold-text">Author:</span> {{ seller.username }}</p>
-              <p class="user-info"><span class="bold-text">Phone:</span> {{ seller.phone_number }}</p>
+		    <p class="user-info"><span class="bold-text">판매자:</span><br> {{ seller.username }}</p>
+		    <p class="user-info"><span class="bold-text">연락처:</span><br> {{ seller.phone_number }}</p>
 
-              <p class="product-info1"><span class="bold-text">Price:</span> <span class="money">{{ product.price|intcomma }}</span></p>
-              <p class="product-info"><span class="bold-text1">Description</span></p>
-              <p class="description"><span class="bold-text">:   </span>{{ product.description }}</p>
-              <div class="actions" style="position: relative;">
+		    <p class="product-info1"><span class="bold-text">가격:</span> <span class="money">{{ product.price|intcomma }}</span></p>
+              <p class="product-info"><span class="bold-text1">세부 내용</span></p>
+              <p class="description" style="width: 800px; height: 300px; overflow: auto;"><span class="bold-text">:   </span>{{ product.description }}</p>              <div class="actions" style="position: relative;">
                 <a href="{% url 'talent:add_to_cart' product_id=product.id %}"class="btn-cart" style="margin-top: 100px;">🛒 Add to Cart</a>
               </div>
           </div>
@@ -54,10 +53,12 @@
     <div class="actions" style="width: fit-content; margin-left: 1200px; margin-top: -90px;">
     </div>
     <br><br>
-    <div style="text-align: center;">
+    {% if user.is_authenticated %}
+      <div style="text-align: center;">
       <button class="btn btn-outline-dark mt-auto" id="open-review-modal">리뷰 작성하기</button>
     </div>
     <br><br>
+    {% endif %}
   <div class="container" style="margin-bottom: 100px;">
     <div class="row">
       {% for review in data %}
@@ -75,9 +76,6 @@
             <a href="#" class="btn btn-outline-dark mt-auto">Delete</a>
           </div>
         </div>
-        
-        
-      
         {% endif %}
         <hr>
       </div>

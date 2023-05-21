@@ -2,13 +2,34 @@ from django.shortcuts import render, redirect
 from .forms import ProductForm, ReviewForm
 from .models import Product, Cart, User, Category, Ordered, Review
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator  
+from django.core.paginator import Paginator
+from django.db.models import Q
+
 
 # Create your views here.
 
 def index(request):
     page = request.GET.get('page', '1')  # 페이지
-    data = Product.objects.all()
+    kw = request.GET.get('kw', '')  # 검색어
+    selected_value = request.GET.get('box')
+    # 선택한 값에 따라 데이터를 정렬하는 로직을 구현
+    if selected_value == '-created_at':
+        data = Product.objects.all().order_by('-created_at')
+    elif selected_value == 'created_at':
+        data = Product.objects.all().order_by('created_at')
+    elif selected_value == '-price':
+        data = Product.objects.all().order_by('-price')
+    elif selected_value == 'price':
+        data = Product.objects.all().order_by('price')
+    else:
+        data = Product.objects.all().order_by('-created_at')  # 디폴트값으로 '-created_at'을 사용
+
+    if kw:
+        data = data.filter(
+            Q(product_name__icontains=kw) |  # 제목 검색
+            Q(description__icontains=kw) |  # 세부 내용 검색
+            Q(user_id__username__icontains=kw)   # 판매자 이름 검색
+        ).distinct()
     seller_ids = data.values_list('user_id', flat=True)
     sellers = User.objects.filter(id__in=seller_ids)
     categorys= Category.objects.all()
@@ -19,7 +40,9 @@ def index(request):
                'sellers':sellers,
                'categorys':categorys,
                'user_name':user_name,
-               'data':page_obj}
+               'data':page_obj,
+               'page': page, 
+               'kw': kw}
     return render(request, 'talent/products_list.html',context)
 
 
@@ -77,7 +100,7 @@ def cart(request) :
         return redirect('common:login')  # 로그인 페이지로 리다이렉트
 
 def category(request, category_id):
-     data = Product.objects.filter(category_id=category_id)
+     data = Product.objects.filter(category_id=category_id).order_by('-created_at')
      seller_ids = data.values_list('user_id', flat=True)
      sellers = User.objects.filter(id__in=seller_ids)
      categorys= Category.objects.all()
@@ -203,3 +226,5 @@ def review_create(request):
 
     else :
         pass
+
+

@@ -78,32 +78,19 @@
       </div>
 
         <div class="col-md-6 text-left" style="margin:auto; ">
-          <p>Email</p>
+          <h3>Email</h3>
           <p>: {{ user.email }}</p>
-          <p>Nick Name</p>
+          <h3>Nick Name</h3>
           <p>: {{ user.username }}</p>
-          <p>Gender</p>
+          <h3>Gender</h3>
           <p>: {{ user.gender }}</p>
-          <p>Date of Birth</p>
+          <h3>Date of Birth</h3>
           <p>: {{ user.birth }}</p>
-          
+          <h3>Phone</h3>
+          <p>: {{ user.phone_number }}</p>
           <!-- 추가 정보 -->
           <form>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="Enter address" value="{{ user.address }}">
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" value="{{ user.phone_number }}">
-            </div>
-            <div class="form-group">
-              <label for="bio">Bio</label>
-              <textarea class="form-control" id="bio" rows="4" placeholder="Enter bio">{{ user.bio }}</textarea>
-            </div>
-
             <p style="margin-top: 80px;">Has Joined Since: {{ user.created_at }}</p>
-            <button type="submit" class="btn btn-primary" style="margin-bottom: 100px;">Update Profile</button>
           </form>
         </div>
       </div>
