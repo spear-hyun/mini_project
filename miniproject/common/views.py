@@ -1,18 +1,67 @@
 from talent.models import User, Ordered, Product
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.hashers import make_password
-from django.contrib import messages
-import re
 from talent.forms import ProfileImageForm
+from .forms import SignupForm
+from django.contrib.auth import login as login2,authenticate
+# SMTP 관련 인증
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_str
+from .tokens import account_activation_token
+from django.contrib import auth
 
-
-
-def validate_phone_number(phone_number):
-    pattern = r"^\d{3}-\d{4}-\d{4}$"
-    return re.match(pattern, phone_number)
 
 def index(request):
     return render(request, 'talent/products_list.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=True)
+            current_site = get_current_site(request) 
+            message = render_to_string('common/activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            mail_title = "계정 활성화 확인 이메일"
+            mail_to = request.POST["email"]
+            email = EmailMessage(mail_title, message, to=[mail_to])
+            email.send()
+            # # 사용자 인증
+            # authenticated_user = authenticate(request, username=user.username, password=form.cleaned_data['password1'])
+            # if authenticated_user is not None:
+            #     # 인증된 사용자 로그인
+            #     login2(request, authenticated_user)
+            return redirect('talent:index')
+        else:
+            render(request, 'common/signup.html', {'form': form})
+    else:
+        form = SignupForm()
+
+    return render(request, 'common/signup.html', {'form': form})
+
+# 계정 활성화 함수(토큰을 통해 인증)
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExsit):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login2(request, user)
+        return redirect("talent:index")
+    else:
+        return render(request, 'talent/products_list.html', {'error' : '계정 활성화 오류'})
+    return 
+
 
 def login(request):
     return render(request, 'common/login.html')
@@ -74,54 +123,6 @@ def createhistory(request, user_id):
         return render(request, 'common/createhistory.html', context)
     else:
         return redirect('common:login')  # 로그인 페이지로 리다이렉트
-    
-
-def signup(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
-        username = request.POST['username']
-        birth = request.POST['birth']
-        gender = request.POST['gender']
-        phone_number = request.POST['phone_number']
-        # User 객체를 생성합니다
-
-        try:
-            User.objects.get(username=username)
-            messages.error(request, '이미 사용 중인 사용자 이름입니다.')
-            return render(request, 'common/signup.html')
-        except User.DoesNotExist:
-            pass
-
-
-        if password != confirm_password:
-            # 패스워드와 패스워드 확인이 일치하지 않는 경우에 대한 처리를 수행합니다
-            messages.error(request,'패스워드와 패스워드 확인이 일치하지 않습니다.')
-            return render(request, 'common/signup.html')
-        
-        if password is None:
-            # 비밀번호 필드가 없는 경우에 대한 처리를 수행합니다
-            error_message = '비밀번호를 입력해주세요.'
-            return render(request, 'common/signup.html', {'error_message': error_message})
-        
-        if not validate_phone_number(phone_number):
-            messages.error(request, "전화번호 형식에 맞지 않습니다.")
-            return render(request, 'common/signup.html')
-            
-        # 비밀번호를 해시하여 저장합니다
-        hashed_password = make_password(password)
-
-        user = User.objects.create(email=email, password=hashed_password, username=username,
-                                   birth=birth, gender=gender, phone_number=phone_number,)
-
-            
-        # 사용자를 성공 페이지 또는 다른 원하는 페이지로 리디렉션합니다
-        return render(request, 'common/signup_success.html')
-        
-
-    # 요청 메서드가 GET인 경우, 회원가입 양식을 렌더링합니다
-    return render(request, 'common/signup.html')
 
 def signup_success(request):
     return render(request, 'common/signup_success.html')

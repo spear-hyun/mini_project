@@ -86,7 +86,9 @@
   .text {
     font-size: 16px;
   }
-
+  .form-field {
+    height: 50px; /* 원하는 높이로 조정 */
+  }
   .form-control {
     display: block;
     width: 100%;

@@ -11,4 +11,6 @@ urlpatterns = [
     path('orderhistory/<int:user_id>/',views.orderhistory, name='orderhistory'),
     path('createhistory/<int:user_id>/',views.createhistory, name='createhistory'),
     path('signup/success', views.signup_success, name='signup_success'),
+    path('activate/<str:uidb64>/<str:token>/', views.activate, name="activate"),
+
 ]

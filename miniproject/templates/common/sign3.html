@@ -48,68 +48,48 @@
                 <div id="signupBoxTitle" style="text-align: center; font-family: 'Shinb7';"><a href = "{% url 'talent:index' %}">☻ 찬웅이네 ☺︎</a></div>
                 <div></div>
                 <hr>
-                    <!-- 사용자오류 표시 -->
-                    {% if form.errors %}
-                        <div class="alert alert-danger">
-                            <ul>
-                                {% for field, errors in form.errors.items %}
-                                    {% for error in errors %}
-                                        <li style="font-size: 14px;"> {{ field }} :{{ error }}</li>
-                                    {% endfor %}
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li style="font-size: 14px;"> {{ error }}</li>
                                 {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
                     <div class="form-group">
                         <label>이메일</label>
-                        <input class="form-control" type="email" name="email" placeholder="xxxxx@xxxxxx.xxxxx">
-                        <div style="display: flex; align-items: center;">
+                        <p>{{ form.email }}</p>
+                        <div style="display: flex; align-items: center; ">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>비밀번호</label>
-                        <input class="form-control" type="password" name="password1" placeholder="비밀번호">
+                        <p>{{ form.password1 }}</p>
                     </div>
                     <div class="form-group">
                         <label>비밀번호 확인</label>
-                        <input class="form-control" type="password" name="password2" placeholder="비밀번호 확인">
+                        <p>{{ form.password2 }}</p>
                     </div>
                     <div class="form-group">
                         <label>닉네임</label>
-                        <input class="form-control" type="text" name="username" placeholder="닉네임">
+                        <p>{{ form.username }}</p>
                     </div>
                     <div class="form-group" style="background-color: white;">
                         <label for="gender">성별</label>
-                        <select class="form-control_select" id="gender" name="gender">
-                            <option value="" disabled selected>- 선택 -</option>
-                            <option value="male">남자</option>
-                            <option value="female">여자</option>
-                        </select>
+                        <p>{{ form.gender }}</p>
                     </div>
                     <div class="form-group-bir">
                         <label>생년월일</label>
-                        <input class="form-control" type="date" name="birth" >
+                        <p>{{ form.birth }}</p>
                     </div>                      
                     <div class="form-group">
                         <label>전화번호</label>
-                        <div class="row">
-                            <div class="col" name="phone_number">
-                                <input class="form-control" type="text" name="phone_number1" placeholder="010" maxlength="3" required>
-                            </div>
-                            -
-                            <div class="col">
-                                <input class="form-control" type="text" name="phone_number2" placeholder="1234" maxlength="4" required>
-                            </div>
-                            -
-                            <div class="col">
-                                <input class="form-control" type="text" name="phone_number3" placeholder="5678" maxlength="4" required>
-                            </div>
-                        </div>
+                        <p>{{ form.phone_number }}</p>
                     </div>   
-
-                    <div class="button-group" >
-                        <div><input type="submit" id="btnsignup" value="회원가입" class="btn btn-signup-color btn-signup-font" style="width: 100%; font-size: 1.5rem;"></div>
-                    </div>
+                    <button type="submit" class="btn btn-signup-color btn-signup-font" style="width: 100%; font-size: 1.5rem;">가입하기</button>
                     <div class="form-group" style="text-align: right; margin-top: 10px;">
                         <a href="{% url 'common:login' %}" style="font-size: 1.5rem;">로그인 화면으로 이동하시겠습니까 ? </a>
                     </div>
@@ -124,4 +104,4 @@
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ
+integrity="sha384-tB6Ya1gLuY0FLKbLk+cfRtXmU6N3X/l1EZyLpZ"></script>
